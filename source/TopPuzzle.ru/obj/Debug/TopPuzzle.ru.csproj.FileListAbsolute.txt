@@ -146,3 +146,4 @@ D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\obj\Debug\TopPuzzle.ru.csprojResolveAssemblyReference.cache
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\obj\Debug\TopPuzzle.ru.dll
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\obj\Debug\TopPuzzle.ru.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\FlickrNet.dll

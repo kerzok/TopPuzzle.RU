@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#loginTextField, #passwordTextField {
+    margin-top: 9.5%;
+    width: 130px;
+    margin-left: 5px;
+}
