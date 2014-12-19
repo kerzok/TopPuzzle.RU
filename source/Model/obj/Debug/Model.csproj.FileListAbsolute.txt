@@ -1,0 +1,8 @@
+C:\TopPuzzle.RU\source\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\TopPuzzle.RU\source\Model\bin\Debug\Model.dll
+C:\TopPuzzle.RU\source\Model\bin\Debug\Model.pdb
+C:\TopPuzzle.RU\source\Model\bin\Debug\Dapper.dll
+C:\TopPuzzle.RU\source\Model\bin\Debug\Dapper.pdb
+C:\TopPuzzle.RU\source\Model\bin\Debug\Dapper.xml
+C:\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
+C:\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
