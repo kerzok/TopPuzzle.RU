@@ -227,3 +227,8 @@ C:\TopPuzzle.RU\source\TopPuzzle.ru\bin\ru\Microsoft.Owin.Security.Google.resour
 C:\TopPuzzle.RU\source\TopPuzzle.ru\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 C:\TopPuzzle.RU\source\TopPuzzle.ru\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\TopPuzzle.RU\source\TopPuzzle.ru\obj\Debug\TopPuzzle.ru.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\Model.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\Dapper.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\Dapper.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\TopPuzzle.ru\bin\Dapper.xml

@@ -303,8 +303,9 @@ namespace TopPuzzle.ru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
+            return RedirectToAction("Index", "Home");
             // Запрос перенаправления к внешнему поставщику входа для связывания имени входа текущего пользователя
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            //return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
         //

@@ -10,7 +10,9 @@ namespace Model.Managers {
         public IEnumerable<Score> GetTopScore(int complexity) {
             return SqlMapper.Execute<Score>("GetTopScore", complexity);
         }
- 
-        
+
+        public void InsertNewScore(Score score) {
+            SqlMapper.Execute("InsertNewScore", score);
+        }
     }
 }

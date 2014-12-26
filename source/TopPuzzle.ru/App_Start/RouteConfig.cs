@@ -34,6 +34,7 @@ namespace TopPuzzle.ru {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.Map("puzzle", "Puzzle", "Editor");
+            routes.Map("register", "Account", "Register");
 
             routes.MapRoute(
                 name: "Default",

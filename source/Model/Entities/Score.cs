@@ -10,6 +10,6 @@ namespace Model.Entities {
         public int PuzzleId { get; set; }
         public int Complexity { get; set; }
         public int Time { get; set; }
-        public int Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

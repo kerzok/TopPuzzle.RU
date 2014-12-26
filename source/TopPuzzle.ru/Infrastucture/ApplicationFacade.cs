@@ -1,16 +1,19 @@
 ﻿using System.Configuration;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using Model.DataMapping;
+using Model.Entities;
 using Model.Managers;
 
 namespace TopPuzzle.ru.Infrastucture {
     public class ApplicationFacade {
-        public AuthManager AuthManager { get; set; }
+        public UserManager UserManager { get; set; }
         public ScoreManager ScoreManager { get; set; }
+        public SignInManager SignInManager { get; set; }
+        
 
         private ApplicationFacade() {
             var mapper = new DapperSqlMapper(ConfigurationManager.ConnectionStrings["toppuzzle"].ConnectionString);
-            AuthManager = new AuthManager(mapper);
             ScoreManager = new ScoreManager(mapper);
         }
 

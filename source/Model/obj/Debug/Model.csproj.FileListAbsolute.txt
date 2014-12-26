@@ -6,3 +6,27 @@ C:\TopPuzzle.RU\source\Model\bin\Debug\Dapper.pdb
 C:\TopPuzzle.RU\source\Model\bin\Debug\Dapper.xml
 C:\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
 C:\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.dll.config
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\EntityFramework.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.Owin.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\EntityFramework.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Microsoft.Owin.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\ru\EntityFramework.resources.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\ru\Microsoft.AspNet.Identity.Core.resources.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\ru\Microsoft.AspNet.Identity.Owin.resources.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\ru\Microsoft.Owin.resources.dll

@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
+using Model.Managers;
 using Owin;
 using TopPuzzle.ru.Models;
 
@@ -19,6 +20,8 @@ namespace TopPuzzle.ru
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
+            app.CreatePerOwinContext(UserManager.Create);
+            app.CreatePerOwinContext<SignInManager>(SignInManager.Create);
             // Включение использования файла cookie, в котором приложение может хранить информацию для пользователя, выполнившего вход,
             // и использование файла cookie для временного хранения информации о входах пользователя с помощью стороннего поставщика входа
             // Настройка файла cookie для входа

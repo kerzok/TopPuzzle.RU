@@ -33,5 +33,9 @@ namespace Model.DataMapping {
                 Dapper.SqlMapper.Execute(connection, procName, parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void Dispose() {
+            //none
+        }
     }
 }
