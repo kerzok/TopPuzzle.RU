@@ -1,0 +1,27 @@
+﻿.player {
+    text-align: center;
+    color: red;
+    font-size: 15pt;
+    width: 25%;
+}
+
+.time {
+    text-align: center;
+    color: blue;
+    font-size: 15pt;
+    width: 25%;
+}
+
+.puzzle {
+    text-align: center;
+    color: green;
+    font-size: 15pt;
+    width: 25%;
+}
+
+.date {
+    text-align: center;
+    color: deeppink;
+    font-size: 15pt;
+    width: 25%;
+}

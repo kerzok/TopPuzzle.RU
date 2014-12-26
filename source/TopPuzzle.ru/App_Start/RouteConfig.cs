@@ -36,6 +36,8 @@ namespace TopPuzzle.ru {
             routes.Map("puzzle", "Puzzle", "Editor");
             routes.Map("register", "Account", "Register");
 
+            routes.Map("scores", "Puzzle", "GetScores");
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
