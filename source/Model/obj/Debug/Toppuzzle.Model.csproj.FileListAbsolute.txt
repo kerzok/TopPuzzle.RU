@@ -1,0 +1,9 @@
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.dll.config
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Debug\Dapper.xml
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Toppuzzle.Model.csprojResolveAssemblyReference.cache

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Model.DataMapping {
+namespace Toppuzzle.Model.DataMapping {
     public interface ISqlMapper {
         IEnumerable<T> Execute<T>(string procName, object parameters = null);
         void Execute(string procName, object parameters);

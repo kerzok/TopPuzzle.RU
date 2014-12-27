@@ -1,44 +1,36 @@
-﻿using System;
-using System.Configuration;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
-using Dapper;
-using Microsoft.AspNet.Identity;
-using Model.DataMapping;
-using Model.Entities;
+﻿using System.Linq;
+using Toppuzzle.Model.DataMapping;
+using Toppuzzle.Model.Entities;
 
-namespace Model.Managers {
-    public class UserManager : UserManager<Account, int> {
-        public UserManager(IUserStore<Account, int> store) : base(store) {
+namespace Toppuzzle.Model.Managers {
+    public class UserManager : BaseManager {
+        public UserManager(ISqlMapper sqlMapeer)
+            : base(sqlMapeer) {
         }
 
-        public static UserManager Create() {
-            return new UserManager(new UserStore(ConfigurationManager.ConnectionStrings["toppuzzle"].ConnectionString));
+        public User InsertAccountToDatabase(User user) {
+            return
+                SqlMapper.Execute<User>("InsertNewUser", new {user.UserName, user.Password, user.Email})
+                    .FirstOrDefault();
         }
 
-        /*public bool InsertAccountToDatabase(Account account) {
-            try {
-                //SqlMapper.Execute("InsertNewAccount", new{UserName = account.UserName, Password = account.Password, Email = account.Email});
-                return true;
-            } catch {
-                return false;
-            }
+        public User GetUserById(int id) {
+            return SqlMapper.Execute<User>("GetUserById", new {Id = id}).FirstOrDefault();
         }
 
-        public Account GetUserAccountById(int id) {
-            //return SqlMapper.Execute<Account>("GetUserAccountById", id).FirstOrDefault();
-        }
-
-        public Account GetUserAccountByLoginAndPassword(string login, string password) {
-            /*return SqlMapper.Execute<Account>("GetUserAccountByLoginAndPassword", new {
+        public User GetUserByLoginAndPassword(string login, string password) {
+            return SqlMapper.Execute<User>("GetUserByLoginAndPassword", new {
                 Login = login,
                 Password = password
-            }).SingleOrDefault();*/
-        /*}
+            }).FirstOrDefault();
+        }
 
-        public Account GetUserAccountByEmail(string email) {
-            //return SqlMapper.Execute<Account>("GetUserAccountByEmail", email).FirstOrDefault();
-        }*/
+        public User GetUserByLogin(string login) {
+            return SqlMapper.Execute<User>("GetUserByLogin", new {Login = login}).FirstOrDefault();
+        }
+
+        public User GetUserAccountByEmail(string email) {
+            return SqlMapper.Execute<User>("GetUserByEmail", email).FirstOrDefault();
+        }
     }
 }

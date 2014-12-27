@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toppuzzle.Site", "Site\Toppuzzle.Site.csproj", "{99747338-D42E-4B62-9192-F955A72529BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toppuzzle.Model", "Model\Toppuzzle.Model.csproj", "{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99747338-D42E-4B62-9192-F955A72529BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99747338-D42E-4B62-9192-F955A72529BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99747338-D42E-4B62-9192-F955A72529BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99747338-D42E-4B62-9192-F955A72529BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

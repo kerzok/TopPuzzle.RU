@@ -1,0 +1,32 @@
+﻿@using Toppuzzle.Site.Infrastucture
+@model Toppuzzle.Site.Models.BaseViewModel
+@if (ApplicationFacade.Instance.IsAuthenticated()) {
+    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"})) {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Здравствуйте, " + ApplicationFacade.Instance.GetCurrentUser().UserName + "!", "Index", "Home", null, new {title = "Manage"})
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+            </li>
+        </ul>
+    }
+}
+else {
+    using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.TextBoxFor(m => m.Login, new {@id = "loginTextField"})
+            </li>
+            <li>
+                @Html.PasswordFor(m => m.Password, new {@id = "passwordTextField"})
+            </li>
+            <li>
+                <input type="submit" value="Выполнить вход" id="loginLink"/>
+            </li>
+            <li>@Html.ActionLink("Регистрация", "Register", "Account", null, new {id = "registerLink"})</li>
+        </ul>
+    }
+}
