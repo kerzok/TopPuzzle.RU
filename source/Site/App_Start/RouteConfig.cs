@@ -26,6 +26,14 @@ namespace Toppuzzle.Site {
             routes.Map("puzzle", "Puzzle", "Editor");
             routes.Map("register", "Account", "Register");
             routes.Map("login", "Account", "Login");
+            routes.Map("cabinet", "Account", "Cabinet");
+            routes.Map("cabinet/default", "Account", "MyPuzzle");
+            routes.Map("cabinet/settings", "Account", "Settings");
+
+            routes.Map("cabinet/settings/default", "Account", "ChangeEmail");
+            routes.Map("cabinet/settings/password", "Account", "ChangePassword");
+            
+            routes.Map("cabinet/settings/avatar", "Account", "ChangeAvatar");
 
             routes.Map("scores", "Puzzle", "GetScores");
 

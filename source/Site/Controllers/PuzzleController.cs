@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Toppuzzle.Model.Entities;
 using Toppuzzle.Site.Infrastucture;
@@ -13,12 +14,9 @@ namespace Toppuzzle.Site.Controllers {
         }
 
         public ActionResult GetScores(int complexity = 1) {
-            var scoresListWithNames = new List<Tuple<Score, string>>();
             var af = ApplicationFacade.Instance;
             var scoresList = af.ScoreManager.GetScores(complexity);
-            foreach (var score in scoresList) {
-                scoresListWithNames.Add(new Tuple<Score, string>(score, af.ScoreManager.GetUserNameById(score.UserId)));
-            }
+            var scoresListWithNames = scoresList.Select(score => new Tuple<Score, string>(score, af.UserManager.GetUserNameById(score.UserId))).ToList();
             return View(new ScoresViewModel {ScoresList = scoresListWithNames});
         }
     }

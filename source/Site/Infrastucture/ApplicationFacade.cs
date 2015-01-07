@@ -15,10 +15,12 @@ namespace Toppuzzle.Site.Infrastucture {
             var mapper = new DapperSqlMapper(ConfigurationManager.ConnectionStrings["toppuzzle"].ConnectionString);
             ScoreManager = new ScoreManager(mapper);
             UserManager = new UserManager(mapper);
+            PuzzleManager = new PuzzleManager(mapper);
         }
 
         public UserManager UserManager { get; set; }
         public ScoreManager ScoreManager { get; set; }
+        public PuzzleManager PuzzleManager { get; set; }
 
         public static ApplicationFacade Instance {
             get {

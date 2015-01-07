@@ -12,8 +12,8 @@ namespace Toppuzzle.Model.Managers {
             return SqlMapper.Execute<Score>("GetScores", new {complexity});
         }
 
-        public string GetUserNameById(int id) {
-            return SqlMapper.Execute<string>("GetUserNameById", new {id}).FirstOrDefault();
+        public IEnumerable<Score> GetUserScoreById(int id) {
+            return SqlMapper.Execute<Score>("GetUserScoreById", new { id });
         }
 
         public void InsertNewScore(Score score) {

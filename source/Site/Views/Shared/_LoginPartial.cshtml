@@ -6,7 +6,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Здравствуйте, " + ApplicationFacade.Instance.GetCurrentUser().UserName + "!", "Index", "Home", null, new {title = "Manage"})
+                @Html.ActionLink("Здравствуйте, " + ApplicationFacade.Instance.GetCurrentUser().UserName + "!", "Cabinet", "Account", null, new {title = "Manage"})
             </li>
             <li>
                 <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
@@ -15,16 +15,17 @@
     }
 }
 else {
-    using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+    using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form", name="login"})) {
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.TextBoxFor(m => m.Login, new {@id = "loginTextField"})
+                @Html.TextBoxFor(m => m.Login, new { @id = "loginTextField", placeholder = "Логин" })
             </li>
             <li>
-                @Html.PasswordFor(m => m.Password, new {@id = "passwordTextField"})
+                @Html.PasswordFor(m => m.Password, new { @id = "passwordTextField", placeholder = "Пароль" })
             </li>
             <li>
-                <input type="submit" value="Выполнить вход" id="loginLink"/>
+                <a href="#" id="loginLink" onclick="document.login.submit();">Выполнить вход</a>
+                <input type="submit" value="Выполнить вход" id="loginLink" style="display: none"/>
             </li>
             <li>@Html.ActionLink("Регистрация", "Register", "Account", null, new {id = "registerLink"})</li>
         </ul>

@@ -1,0 +1,7 @@
+﻿@model Toppuzzle.Site.Models.MyPuzzleViewModel
+
+@if (Model.PuzzlesForUser.Any()) {
+    <div id="puzzle-block"></div>
+} else {
+    <h2>Вы пока не собирали пазлов</h2>
+}

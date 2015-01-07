@@ -42,8 +42,10 @@
     <Compile Include="DataMapping\DapperSqlMapper.cs" />
     <Compile Include="DataMapping\ISqlMapper.cs" />
     <Compile Include="Entities\IUser.cs" />
+    <Compile Include="Entities\Puzzle.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Score.cs" />
+    <Compile Include="Managers\PuzzleManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\ScoreManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

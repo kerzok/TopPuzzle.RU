@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using Toppuzzle.Model.DataMapping;
 using Toppuzzle.Model.Entities;
 
@@ -31,6 +32,14 @@ namespace Toppuzzle.Model.Managers {
 
         public User GetUserAccountByEmail(string email) {
             return SqlMapper.Execute<User>("GetUserByEmail", email).FirstOrDefault();
+        }
+
+        public string GetUserNameById(int id) {
+            return SqlMapper.Execute<string>("GetUserNameById", new { id }).FirstOrDefault();
+        }
+
+        public void UpdateUser(User user) {
+            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, user.Password, user.Avatar, user.HasAvatar});
         }
     }
 }

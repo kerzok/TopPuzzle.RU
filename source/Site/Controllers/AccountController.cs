@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using Toppuzzle.Model.Entities;
@@ -58,31 +61,78 @@ namespace Toppuzzle.Site.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-        /*[Authorize]
+        [UserAuthorize]
         public ActionResult Cabinet() {
             var af = ApplicationFacade.Instance;
             var user = af.GetCurrentUser();
-            var countStylystOrders = user.UserType == (int)UserType.Admin
-                ? af.OrderManager.GetCountNotProcessedStylystOrders()
-                : -1;
-            return System.Web.UI.WebControls.View(new CabinetViewModel() {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Sex = user.Sex,
-                Description = user.Description,
-                UserType = user.UserType,
-                CountStylystOrders = countStylystOrders
+            var puzzle = af.PuzzleManager.GetPuzzlesByUserId(user.Id);
+            return View(new CabinetViewModel {
+                User = user,
+                PuzzlesForUser = puzzle
             });
         }
 
+        [UserAuthorize]
+        public ActionResult Settings() {
+            return PartialView();
+        }
+
+        [UserAuthorize]
+        public ActionResult ChangePassword() {
+            return PartialView();
+        }
+
+        [UserAuthorize]
+        public ActionResult ChangeEmail() {
+            return PartialView();
+        }
+
         [HttpPost]
-        [Authorize]
-        public JsonResult SetUserInfo(string name) {
-            var af = ApplicationFacade.Instance;
-            var user = af.GetCurrentUser();
-            af.SetCurrentUser(af.UserManager.UpdateUserInfo(user.Id, firstName, lastName, description, sex));
-            return Json(new { result = 1 });
-        }*/
+        [UserAuthorize]
+        public ActionResult ChangePassword(string OldPassword, string NewPassword, string ConfirmPassword) {
+            var currentUser = ApplicationFacade.Instance.GetCurrentUser();
+            if (!currentUser.Password.Equals(OldPassword)) return Json(new { data = "неверный старый пароль" }, JsonRequestBehavior.AllowGet);
+            if (!NewPassword.Equals(ConfirmPassword)) return Json(new { data = "пароли не совпадают" }, JsonRequestBehavior.AllowGet);
+            currentUser.Password = NewPassword;
+            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
+            ApplicationFacade.Instance.SetCurrentUser(currentUser);
+            return Json(new { data = "ok"}, JsonRequestBehavior.AllowGet);
+        }
+
+        [UserAuthorize]
+        [HttpPost]
+        public ActionResult ChangeEmail(string Email) {
+            var user = ApplicationFacade.Instance.GetCurrentUser();
+            user.Email = Email;
+            ApplicationFacade.Instance.UserManager.UpdateUser(user);
+            ApplicationFacade.Instance.SetCurrentUser(user);
+            return Json(new{data="ok"}, JsonRequestBehavior.AllowGet);
+        }
+
+        [UserAuthorize]
+        public ActionResult ChangeAvatar() {
+            var currentUser = ApplicationFacade.Instance.GetCurrentUser();
+            if (Request.Files.Count <= 0) return PartialView();
+            var file = Request.Files[0];
+            if (file == null || file.ContentLength <= 0) return PartialView();
+            Directory.CreateDirectory(Server.MapPath("~/Content/Users/" + currentUser.Id + "/"));
+            var picture = "avatar." + file.FileName.Substring(file.FileName.IndexOf('.') + 1);
+            var fileName = "~/Content/Users/" + currentUser.Id + "/" + picture;
+            fileName = Server.MapPath(fileName);
+            file.SaveAs(fileName);
+            currentUser.HasAvatar = true;
+            currentUser.Avatar = picture;
+            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
+            ApplicationFacade.Instance.SetCurrentUser(currentUser);
+            return Json(new{data="ok", fileName}, JsonRequestBehavior.AllowGet);
+        }
+
+        [UserAuthorize]
+        public ActionResult MyPuzzle() {
+            var user = ApplicationFacade.Instance.GetCurrentUser();
+            var puzzle = ApplicationFacade.Instance.PuzzleManager.GetPuzzlesByUserId(user.Id);
+            return PartialView(new MyPuzzleViewModel{PuzzlesForUser = puzzle});
+        }
 
         private static bool Authenticate(string username, string password) {
             var af = ApplicationFacade.Instance;
@@ -90,6 +140,19 @@ namespace Toppuzzle.Site.Controllers {
             if (user == null) return false;
             af.SetCurrentUser(user);
             return true;
+        }
+
+        private string RenderViewToString(string viewName, object model) {
+            ViewData.Model = model;
+            using (var sw = new StringWriter()) {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }

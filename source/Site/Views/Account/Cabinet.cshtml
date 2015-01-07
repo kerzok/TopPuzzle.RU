@@ -1,0 +1,33 @@
+﻿@model Toppuzzle.Site.Models.CabinetViewModel
+
+@{
+    ViewBag.Title = "Кабинет";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Scripts/Cabinet.js"></script>
+}
+
+@section styles {
+    <link href="~/Scripts/jquery-ui/jquery-ui.css" rel="stylesheet"/>
+}
+
+<div id="user-info">
+    <div id="avatar">
+        @if (Model.User.HasAvatar) {
+            <img src="~/Content/Users/@Model.User.Id/@Model.User.Avatar" width="90" height="90" alt="avatar" id="avatar-img"/>
+        } else {
+            <img src="~/Content/Images/Placeholder.png" width="90" height="90" alt="avatar placeholder" id="avatar-img" />
+        }
+    </div>
+    <div id="user-info-and-settings">
+        <h3>@Model.User.UserName</h3>
+        <div id="rating">Рейтинг: @Model.User.Rating</div>
+        <div id="my-puzzle" class="btn btn-default">Мои пазлы</div>
+        <div id="settings" class="btn btn-default">Настройки</div>
+    </div>
+</div>
+<div id="partial"></div>
