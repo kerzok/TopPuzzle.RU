@@ -33,18 +33,25 @@
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="FlickrNet, Version=3.15.0.0, Culture=neutral, PublicKeyToken=2491df59efa5d132, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FlickrNet.3.15.0\lib\net20\FlickrNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataMapping\BaseManager.cs" />
     <Compile Include="DataMapping\DapperSqlMapper.cs" />
     <Compile Include="DataMapping\ISqlMapper.cs" />
     <Compile Include="Entities\IUser.cs" />
+    <Compile Include="Entities\Pictures.cs" />
     <Compile Include="Entities\Puzzle.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Score.cs" />
+    <Compile Include="Managers\PictureManager.cs" />
     <Compile Include="Managers\PuzzleManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\ScoreManager.cs" />
@@ -52,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FlickrNet.chm" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

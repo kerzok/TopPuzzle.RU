@@ -16,11 +16,13 @@ namespace Toppuzzle.Site.Infrastucture {
             ScoreManager = new ScoreManager(mapper);
             UserManager = new UserManager(mapper);
             PuzzleManager = new PuzzleManager(mapper);
+            PictureManager = new PictureManager(mapper);
         }
 
         public UserManager UserManager { get; set; }
         public ScoreManager ScoreManager { get; set; }
         public PuzzleManager PuzzleManager { get; set; }
+        public PictureManager PictureManager { get; set; }
 
         public static ApplicationFacade Instance {
             get {
