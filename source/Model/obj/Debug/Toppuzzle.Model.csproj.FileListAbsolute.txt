@@ -7,3 +7,12 @@ D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\bin\Deb
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
 D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Model\obj\Debug\Toppuzzle.Model.csprojResolveAssemblyReference.cache
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Model.dll.config
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Model.dll
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Model.pdb
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Dapper.dll
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Dapper.pdb
+C:\TopPuzzle\TopPuzzle.RU\source\Model\bin\Debug\Dapper.xml
+C:\TopPuzzle\TopPuzzle.RU\source\Model\obj\Debug\Toppuzzle.Model.csprojResolveAssemblyReference.cache
+C:\TopPuzzle\TopPuzzle.RU\source\Model\obj\Debug\Model.dll
+C:\TopPuzzle\TopPuzzle.RU\source\Model\obj\Debug\Model.pdb
