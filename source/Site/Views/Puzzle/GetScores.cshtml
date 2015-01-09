@@ -2,10 +2,7 @@
 
 @{
     ViewBag.Title = "GetScores";
-}
-
-@section styles{
-    <link href="~/Content/Scores.css" rel="stylesheet"/>
+    Layout = "";
 }
 
 <table>
@@ -15,7 +12,8 @@
         <th class="puzzle">Puzzle</th>
         <th class="date">Date</th>
     </tr>
-    @foreach (var score in Model.ScoresList) {
+    @foreach (var score in Model.ScoresList)
+    {
         <tr>
             <td class="player">@score.Item2</td>
             <td class="time">@score.Item1.Time</td>

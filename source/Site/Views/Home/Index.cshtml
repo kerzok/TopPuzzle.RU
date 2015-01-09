@@ -1,3 +1,23 @@
 ﻿@{
     ViewBag.Title = "Лучшие пазлы онлайн";
 }
+
+@section styles{
+    <link href="~/Content/Scores.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Scripts/Home.js"></script>
+}
+
+<div id="common">
+    <div class="parts">Start</div>
+    <div class="parts">
+        <div class="complexity" complexity="1">Easy</div>
+        <div class="complexity" complexity="2">Medium</div>
+        <div class="complexity" complexity="3">Hard</div>
+        <div id="scores"></div>
+    </div>
+</div>

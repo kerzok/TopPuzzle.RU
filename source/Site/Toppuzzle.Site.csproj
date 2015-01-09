@@ -97,11 +97,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Placeholder.png" />
     <Content Include="Content\PuzzleEditor.css" />
+    <Content Include="Content\Scores.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Cabinet.js" />
+    <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\jquery-ui\index.html" />
     <Content Include="Scripts\jquery-ui\jquery-ui.css" />
     <Content Include="Scripts\jquery-ui\jquery-ui.js" />
@@ -146,13 +148,13 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Puzzle\Editor.cshtml" />
-    <Content Include="Views\Puzzle\GetScores.cshtml" />
     <Content Include="Views\Account\Cabinet.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Account\MyPuzzle.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangeAvatar.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
+    <Content Include="Views\Puzzle\GetScores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

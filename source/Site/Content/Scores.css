@@ -25,3 +25,23 @@
     font-size: 15pt;
     width: 25%;
 }
+
+.parts {
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+}
+
+#common {
+    text-align: justify;
+}
+
+.complexity {
+    text-align: center;
+    display: inline-block;
+    width: 30%;
+}
+
+#scores {
+    display: inline-block;
+}
