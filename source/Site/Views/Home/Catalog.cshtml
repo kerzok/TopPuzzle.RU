@@ -1,0 +1,11 @@
+﻿@using Toppuzzle.Site.Models
+@model CatalogViewModel
+@{
+    Layout = null;
+}
+
+@foreach (var picture in Model.Pictures) {
+    <div class="item main_page_prewiew" id="media">
+        <img src="@Url.Content(picture.Source)" width="200" height="113"/>
+    </div>
+}

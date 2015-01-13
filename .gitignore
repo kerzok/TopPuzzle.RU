@@ -7,29 +7,37 @@
 *.sln.docstates
 
 # Build results
-source/[Dd]ebug/
-source/[Dd]ebugPublic/
-source/[Rr]elease/
-source/x64/
-source/build/
-source/bld/
-source/[Bb]in/
-source/[Oo]bj/
+source/Site/[Dd]ebug/*
+source/Site/[Dd]ebugPublic/*
+source/Site/[Rr]elease/*
+source/Site/x64/*
+source/Site/build/*
+source/Site/bld/*
+source/Site/[Bb]in/*
+source/Site/[Oo]bj/*
+source/Model/[Dd]ebug/*
+source/Model/[Dd]ebugPublic/*
+source/Model/[Rr]elease/*
+source/Model/x64/*
+source/Model/build/*
+source/Model/bld/*
+source/Model/[Bb]in/*
+source/Model/[Oo]bj/*
 
 # Roslyn cache directories
 *.ide/
 
 # MSTest test Results
-source/[Tt]est[Rr]esult*/
-source/[Bb]uild[Ll]og.*
+source/Site/[Tt]est[Rr]esult*/
+source/Site/[Bb]uild[Ll]og.*
 
 #NUNIT
 *.VisualState.xml
 TestResult.xml
 
 # Build Results of an ATL Project
-source/[Dd]ebugPS/
-source/[Rr]eleasePS/
+source/Site/[Dd]ebugPS/
+source/Site/[Rr]eleasePS/
 dlldata.c
 
 *_i.c
@@ -61,7 +69,7 @@ dlldata.c
 _Chutzpah*
 
 # Visual C++ cache files
-source/ipch/
+source/Site/ipch/
 *.aps
 *.ncb
 *.opensdf
@@ -187,3 +195,6 @@ source/FakesAssemblies/
 source/GeneratedArtifacts/
 source/_Pvt_Extensions/
 ModelManifest.xml
+
+source/Site/Content/Users/*
+source/Site/Content/Puzzles/*

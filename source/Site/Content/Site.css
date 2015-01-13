@@ -8,6 +8,19 @@
     padding-right: 15px;
 }
 
+/*body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}*/
+
 .dl-horizontal dt { white-space: normal; }
 
 input,
@@ -49,7 +62,7 @@ textarea { max-width: 280px; }
     padding: 1px 1px 1px 1px;
 }
 
-#horizontal-navlist li {
+.horizontal-navlist li {
     display: inline;
     list-style-type: none;
     padding-right: 20px;
@@ -69,3 +82,73 @@ textarea { max-width: 280px; }
     #loginLink:hover {
         color: white;
     }
+
+.main_page_prewiew {
+    height: 121px;
+    width: 208px;
+    display: inline-block;
+    padding-right: 10px;
+    float: left;
+}
+
+#media {
+    margin-left: 15px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    border: 4px solid;
+    border-color: transparent;
+}
+
+#media:hover {
+    border: 4px solid;
+    border-color: lightblue;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#catalog-with-pager {
+    width: 59%;
+}
+
+#catalog {
+    display: inline-block;
+}
+
+#pager-navlist li {
+    padding-right: 0;
+}
+
+#random {
+    width: 96%;
+    max-width: 100%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#pager {
+    margin-top: 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+    #pager ul li {
+        margin-left: 8px;
+    }
+
+        #pager ul li .pagerNumber {
+            text-decoration: none;
+            padding: 4px 7px;
+            background-color: #d9d9d9;
+            color: #258DC9;
+        }
+
+            #pager ul li .pagerNumber:hover {
+                cursor: pointer;
+            }
+
+            #pager ul li .pagerNumber.active {
+                background-color: #d02718;
+                color: #fff;
+                font-weight: bold;
+            }

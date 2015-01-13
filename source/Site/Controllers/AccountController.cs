@@ -65,10 +65,10 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Cabinet() {
             var af = ApplicationFacade.Instance;
             var user = af.GetCurrentUser();
-            var puzzle = af.PuzzleManager.GetPuzzlesByUserId(user.Id);
+            //var puzzle = af.PuzzleManager.GetPuzzlesByUserId(user.Id);
             return View(new CabinetViewModel {
                 User = user,
-                PuzzlesForUser = puzzle
+                PuzzlesForUser = null
             });
         }
 
@@ -140,19 +140,6 @@ namespace Toppuzzle.Site.Controllers {
             if (user == null) return false;
             af.SetCurrentUser(user);
             return true;
-        }
-
-        private string RenderViewToString(string viewName, object model) {
-            ViewData.Model = model;
-            using (var sw = new StringWriter()) {
-                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
-                                                                         viewName);
-                var viewContext = new ViewContext(ControllerContext, viewResult.View,
-                                             ViewData, TempData, sw);
-                viewResult.View.Render(viewContext, sw);
-                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
-                return sw.GetStringBuilder().ToString();
-            }
         }
     }
 }

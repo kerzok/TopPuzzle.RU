@@ -1,6 +1,13 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
+using Toppuzzle.Model.Entities;
 using Toppuzzle.Site.Helpers;
+using Toppuzzle.Site.Infrastucture;
+using Toppuzzle.Site.Models;
 
 namespace Toppuzzle.Site.Controllers {
     public class HomeController : Controller {
@@ -9,16 +16,46 @@ namespace Toppuzzle.Site.Controllers {
             return View();
         }
 
-        public ActionResult About() {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+        public ActionResult GetScores(int complexity = 1) {
+            var af = ApplicationFacade.Instance;
+            var scoresList = af.ScoreManager.GetScores(complexity);
+            var scoresListWithNames = scoresList.Select(score => new Tuple<Score, string>(score, af.UserManager.GetUserNameById(score.UserId))).ToList();
+            return View(new ScoresViewModel { ScoresList = scoresListWithNames });
         }
 
-        public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
+        public ActionResult Catalog(int page = 1) {
+            var pictures = (from picture in ApplicationFacade.Instance.PictureManager.GetAllPictures(page - 1)
+                select "~/Content/Puzzles/" + picture.Picture
+                into source
+                let image = new Bitmap(Server.MapPath(source))
+                select new PictureViewModel {
+                    Height = image.Height, Width = image.Width, Source = source
+                }).ToList();
+            var result = new CatalogViewModel {
+                Pictures = pictures,
+                CurrentPage = page,
+                PageCount = ApplicationFacade.Instance.PictureManager.GetTotalPages()
+            };
+            var view = RenderViewToString("Catalog", result);
+            return Json(new { view, CurrentPage = page, PageCount = ApplicationFacade.Instance.PictureManager.GetTotalPages()});
+        }
 
-            return View();
+        [HttpPost]
+        public void Random() {
+            ApplicationFacade.Instance.PictureManager.GetRandomPicture();
+        }
+
+        private string RenderViewToString(string viewName, object model) {
+            ViewData.Model = model;
+            using (var sw = new StringWriter()) {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }

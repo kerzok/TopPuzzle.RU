@@ -35,7 +35,9 @@ namespace Toppuzzle.Site {
             
             routes.Map("cabinet/settings/avatar", "Account", "ChangeAvatar");
 
-            routes.Map("scores", "Puzzle", "GetScores");
+            routes.Map("scores", "Home", "GetScores");
+            routes.Map("home/getdata", "Home", "Catalog");
+            routes.Map("home/random", "Home", "Random");
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Home", action = "Index", id = UrlParameter.Optional}

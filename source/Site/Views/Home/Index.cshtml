@@ -13,11 +13,17 @@
 }
 
 <div id="common">
-    <div class="parts">Start</div>
-    <div class="parts">
-        <div class="complexity" complexity="1">Easy</div>
-        <div class="complexity" complexity="2">Medium</div>
-        <div class="complexity" complexity="3">Hard</div>
-        <div id="scores"></div>
+    <div>
+        <div class="parts" id="catalog-with-pager">
+            <input type="button" id="random" class="btn btn-default" value="Случайный пазл" />
+            <div id="catalog"></div>
+            <div id="pager"></div>
+        </div>
+        <div class="parts" id="scores-table">
+            <div class="complexity" complexity="1">Easy</div>
+            <div class="complexity" complexity="2">Medium</div>
+            <div class="complexity" complexity="3">Hard</div>
+            <div id="scores"></div>
+        </div>
     </div>
 </div>

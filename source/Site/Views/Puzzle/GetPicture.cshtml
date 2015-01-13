@@ -1,0 +1,7 @@
+﻿@model Toppuzzle.Site.Models.PictureViewModel
+
+@{
+    Layout = null;
+}
+<canvas id="editor" height="@Model.Height" width="@Model.Width"></canvas>
+<img src="@Url.Content(Model.Source)" alt="" width="@(Model.Width / 5)" height="@(Model.Height / 5)" style="display: inline-block"/>

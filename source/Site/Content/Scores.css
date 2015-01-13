@@ -28,7 +28,6 @@
 
 .parts {
     display: inline-block;
-    width: 49%;
     text-align: center;
 }
 
@@ -44,4 +43,11 @@
 
 #scores {
     display: inline-block;
+}
+
+#scores-table {
+    width: 30%;
+    position: absolute;
+    top: 70px;
+    right: 50px;
 }
