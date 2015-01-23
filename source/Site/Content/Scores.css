@@ -31,14 +31,38 @@
     text-align: center;
 }
 
+#scores {
+    padding-top: 13px;
+}
+
 #common {
     text-align: justify;
 }
 
 .complexity {
+    border: #000000;
+    border-radius: 69%;
+    -moz-border-radius: 69%;
+    -webkit-border-radius: 69%;
+    border-style: dotted;
     text-align: center;
+    font-size: 14pt;
+    font-family: sans-serif;
+    margin-left: 3px;
+    margin-right: 3px;
     display: inline-block;
     width: 30%;
+}
+
+.complexity:hover {
+    cursor: pointer;
+    color: #2172BA;
+    background-color: #DCB06F;
+}
+
+.chosen-complexity {
+    font-style: inherit;
+    background-color: #FA6A04;
 }
 
 #scores {
