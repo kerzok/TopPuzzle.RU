@@ -177,12 +177,17 @@ var changeEmail = function () {
 
 $(document).ready(function() {
     $("#partial").load("/cabinet/default");
+    $("#my-puzzle").addClass("active");
 
     $("#my-puzzle").click(function() {
         $("#partial").load("/cabinet/default");
+        $("#my-puzzle").addClass("active");
+        $("#settings").removeClass("active");
     });
 
-    $("#settings").click(function() {
+    $("#settings").click(function () {
+        $("#my-puzzle").removeClass("active");
+        $("#settings").addClass("active");
         $.get("/cabinet/settings", function(result) {
             $("#partial").empty();
             $("#partial").append(result);

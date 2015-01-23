@@ -62,6 +62,10 @@ textarea { max-width: 280px; }
     padding: 1px 1px 1px 1px;
 }
 
+.horizontal-navlist {
+    padding-top: 20px;
+}
+
 .horizontal-navlist li {
     display: inline;
     list-style-type: none;
@@ -148,7 +152,7 @@ textarea { max-width: 280px; }
             }
 
             #pager ul li .pagerNumber.active {
-                background-color: #d02718;
+                background-color: #FB6C24;
                 color: #fff;
                 font-weight: bold;
             }

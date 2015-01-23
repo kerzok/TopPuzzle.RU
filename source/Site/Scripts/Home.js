@@ -74,6 +74,7 @@ var getDataToCatalog = function(page) {
 $(document).ready(function () {
     hidePopup();
     $("#scores").load("/scores");
+    $("#c-easy").addClass("chosen-complexity");
     getDataToCatalog(1);
 
     $("#random").click(function () {
@@ -87,6 +88,23 @@ $(document).ready(function () {
         var complexity = $(this).attr("complexity");
         $("#scores").empty();
         $("#scores").load("/scores", { "complexity": complexity }, null);
+        switch (complexity) {
+            case "1":
+                $("#c-easy").addClass("chosen-complexity");
+                $("#c-medium").removeClass("chosen-complexity");
+                $("#c-hard").removeClass("chosen-complexity");
+            break;
+            case "2":
+                $("#c-easy").removeClass("chosen-complexity");
+                $("#c-medium").addClass("chosen-complexity");
+                $("#c-hard").removeClass("chosen-complexity");
+            break;
+            case "3":
+                $("#c-easy").removeClass("chosen-complexity");
+                $("#c-medium").removeClass("chosen-complexity");
+                $("#c-hard").addClass("chosen-complexity");
+            break;
+        }
     });
 
     $("#easy, #medium, #hard").click(function() {
