@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Toppuzzle.Site.Models.EditorViewModel
 
 @{
     ViewBag.Title = "title";
@@ -9,6 +9,11 @@
     <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
     <script src="~/Scripts/Puzzle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#puzzle-block").load("/puzzle/get", {"complexity":@Model.Complexity, "pictureId":@Model.PictureId});
+        })
+    </script>
 }
 
 @section styles{

@@ -109,7 +109,11 @@ $(document).ready(function () {
 
     $("#easy, #medium, #hard").click(function() {
         var complexity = $(this).attr("complexity");
-        $.post("/puzzle/get", { "complexity": complexity, "pictureId": pictureId });
+        window.location.href = "puzzle?complexity=" + complexity + "&pictureId=" + pictureId;
+        //$.post("/puzzle/get/", { "complexity": complexity, "pictureId": pictureId }, function(data) {
+        //    $(document).empty();
+        //    $(document).append(data.view);
+        //});
     });
 });
 
