@@ -24,6 +24,7 @@ namespace Toppuzzle.Site {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.Map("puzzle", "Puzzle", "Editor");
+            routes.Map("puzzle/get", "Puzzle", "GetPictures");
             routes.Map("register", "Account", "Register");
             routes.Map("login", "Account", "Login");
             routes.Map("cabinet", "Account", "Cabinet");

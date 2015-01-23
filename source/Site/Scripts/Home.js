@@ -1,4 +1,5 @@
 ﻿var lastCurrentPage = 1;
+var pictureId = 0;
 function appendPage(i, currentPage) {
     if (i === currentPage) {
         lastCurrentPage = i;
@@ -6,6 +7,14 @@ function appendPage(i, currentPage) {
     } else {
         return "<li> <span class=\"pagerNumber\">" + i + "</span></li>\n";
     }
+}
+
+function showPopup() {
+    $("#popup1").show();
+}
+
+function hidePopup() {
+    $("#popup1").hide();
 }
 
 function fillPager(pageCount, currentPage) {
@@ -49,6 +58,12 @@ var getDataToCatalog = function(page) {
             $("#catalog").empty();
             $("#catalog").append(data.view);
             fillPager(data.PageCount, data.CurrentPage);
+            jQuery("div[id=media]").each(function () {
+                $(this).click(function() {
+                    showPopup();
+                    pictureId = $(this).attr("picture_id");
+                });
+            });
             $(".pagerNumber").click(function (e) {
                 getDataToCatalog(e.target.textContent.replace(/[^0-9]+/, "").trim());
             });
@@ -57,6 +72,7 @@ var getDataToCatalog = function(page) {
 }
 
 $(document).ready(function () {
+    hidePopup();
     $("#scores").load("/scores");
     getDataToCatalog(1);
 
@@ -71,6 +87,11 @@ $(document).ready(function () {
         var complexity = $(this).attr("complexity");
         $("#scores").empty();
         $("#scores").load("/scores", { "complexity": complexity }, null);
+    });
+
+    $("#easy, #medium, #hard").click(function() {
+        var complexity = $(this).attr("complexity");
+        $.post("/puzzle/get", { "complexity": complexity, "pictureId": pictureId });
     });
 });
 

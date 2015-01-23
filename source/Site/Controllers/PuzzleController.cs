@@ -14,22 +14,24 @@ namespace Toppuzzle.Site.Controllers {
             return View();
         }
 
-        //public ActionResult Temp() {
-        //    return RedirectToAction("GetPicture", new { pictureId = "15611247863", complexity = 1 });
-        //}
+        public ActionResult Temp() {
+            return RedirectToAction("GetPicture", new { pictureId = "15611247863", complexity = 1 });
+        }
 
-        //public ActionResult GetPicture(string pictureId, int complexity) {
-        //    var picture = ApplicationFacade.Instance.PictureManager.GetPictureByPictureId(pictureId);
-        //    var source = "~/Content/Puzzles/" + picture.Picture;
-        //    var image = new Bitmap(Server.MapPath(source));
-        //    var cuttedImages = ApplicationFacade.Instance.PictureManager.CutImage(image, complexity);
-        //    return View(new PictureViewModel {
-        //        Complexity = complexity,
-        //        Height = image.Height,
-        //        Width = image.Width,
-        //        Parts = cuttedImages,
-        //        Source = source
-        //    });
-        //}
+        [HttpPost]
+        public ActionResult GetPicture(string pictureId, int complexity) {
+            var picture = ApplicationFacade.Instance.PictureManager.GetPictureByPictureId(pictureId);
+            var source = "~/Content/Puzzles/" + picture.Picture;
+            var image = new Bitmap(Server.MapPath(source));
+            var cuttedImages = ApplicationFacade.Instance.PictureManager.CutImage(image, complexity);
+            return View(new PictureViewModel
+            {
+                Complexity = complexity,
+                Height = image.Height,
+                Width = image.Width,
+                Parts = cuttedImages,
+                Source = source
+            });
+        }
     }
 }

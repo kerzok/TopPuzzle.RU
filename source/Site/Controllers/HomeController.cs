@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Toppuzzle.Model.Entities;
-using Toppuzzle.Site.Helpers;
 using Toppuzzle.Site.Infrastucture;
 using Toppuzzle.Site.Models;
 
@@ -28,7 +26,7 @@ namespace Toppuzzle.Site.Controllers {
                 select "~/Content/Puzzles/" + picture.Picture
                 into source
                 let image = new Bitmap(Server.MapPath(source))
-                select new PictureViewModel {
+                select new PictureViewModel {Id = source.Substring(source.LastIndexOf('/') + 1, source.LastIndexOf('.') - (source.LastIndexOf('/') + 1)),
                     Height = image.Height, Width = image.Width, Source = source
                 }).ToList();
             var result = new CatalogViewModel {
@@ -44,6 +42,10 @@ namespace Toppuzzle.Site.Controllers {
         public void Random() {
             ApplicationFacade.Instance.PictureManager.GetRandomPicture();
         }
+
+        //public ActionResult GetPuzzle(int id) {
+            
+        //}
 
         private string RenderViewToString(string viewName, object model) {
             ViewData.Model = model;

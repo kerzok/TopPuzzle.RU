@@ -5,8 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts {
+    <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Scripts/Puzzle.js"></script>
+}
+
 @section styles{
     <link href="~/Content/PuzzleEditor.css" rel="stylesheet"/>
 }
 
-<canvas id="puzzleCanvas" width="400" height="300"></canvas>
+<div id="puzzle-block"></div>
