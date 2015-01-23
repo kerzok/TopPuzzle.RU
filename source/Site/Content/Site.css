@@ -62,6 +62,10 @@ textarea { max-width: 280px; }
     padding: 1px 1px 1px 1px;
 }
 
+.horizontal-navlist {
+    padding-top: 20px;
+}
+
 .horizontal-navlist li {
     display: inline;
     list-style-type: none;
