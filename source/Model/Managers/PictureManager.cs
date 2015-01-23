@@ -13,7 +13,7 @@ namespace Toppuzzle.Model.Managers
 {
     public class PictureManager : BaseManager {
         private readonly Flickr _api;
-        private const int ItemsPerPage = 15;
+        private const int ItemsPerPage = 9;
 
         public PictureManager(ISqlMapper mapper) : base(mapper) {
             _api = new Flickr("b7174fdfb7f58dde37f98791c9c725f9", "96080f898b0da2e3") {InstanceCacheDisabled = true};

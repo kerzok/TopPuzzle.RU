@@ -40,7 +40,7 @@
 }
 
 .complexity {
-    border: #000000;
+    border: 2px #000000;
     border-radius: 69%;
     -moz-border-radius: 69%;
     -webkit-border-radius: 69%;
@@ -57,12 +57,12 @@
 .complexity:hover {
     cursor: pointer;
     color: #2172BA;
-    background-color: #DCB06F;
+    background-color: #FA6A04;
 }
 
 .chosen-complexity {
     font-style: inherit;
-    background-color: #FA6A04;
+    background-color: #DCB06F;
 }
 
 #scores {
