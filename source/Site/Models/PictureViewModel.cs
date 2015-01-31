@@ -11,6 +11,7 @@ namespace Toppuzzle.Site.Models {
         public int Width { get; set; }
         public string Source { get; set; }
         public int Complexity { get; set; }
-        public IEnumerable<Bitmap> Parts { get; set; } 
+        public IEnumerable<string> Parts { get; set; }
+        public IEnumerable<int> RandomList { get; set; } 
     }
 }
