@@ -28,13 +28,15 @@ namespace Toppuzzle.Site.Controllers {
             var source = "~/Content/Puzzles/" + picture.Picture;
             var image = new Bitmap(Server.MapPath(source));
             var cuttedImages = ApplicationFacade.Instance.PictureManager.CutImage(image, complexity);
+            var randomList = ApplicationFacade.Instance.PictureManager.GetRandomList(complexity);
             return View(new PictureViewModel
             {
                 Complexity = complexity,
                 Height = image.Height,
                 Width = image.Width,
                 Parts = cuttedImages,
-                Source = source
+                Source = source,
+                RandomList = randomList
             });
         }
 
