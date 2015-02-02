@@ -130,7 +130,6 @@ textarea { max-width: 280px; }
 
 #pager {
     text-align: center;
-    display: inline-block;
 }
 
     #pager ul li {
