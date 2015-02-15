@@ -1,3 +1,5 @@
 ﻿$(document).ready(function() {
-    $("#puzzle-block").load("/puzzle/get");
+    $("#puzzle-block").ready(function () {
+        
+    });
 })

@@ -8,10 +8,74 @@
 @section scripts {
     <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Scripts/fabric.js"></script>
     <script src="~/Scripts/Puzzle.js"></script>
     <script>
+        
         $(document).ready(function () {
-            $("#puzzle-block").load("/puzzle/get", {"complexity":@Model.Complexity, "pictureId":@Model.PictureId});
+            $("#puzzle-block").load("/puzzle/get", {"complexity":@Model.Complexity, "pictureId":@Model.PictureId}, function() {
+                var canvas = new fabric.Canvas("editor", {
+                    backgroundColor: "#ffffff"
+                });
+
+                var rowCount = 0;
+                var cellCount = 0;
+                switch(@Model.Complexity) {
+                    case 1:
+                        rowCount = 4;
+                        cellCount = 3;
+                        break;
+                    case 2:
+                        rowCount = 6;
+                        cellCount = 4;
+                        break;
+                    case 3:
+                        rowCount = 8;
+                        cellCount = 6;
+                        break;
+                }
+
+                for (var i = 1; i < rowCount; i++) {
+                    canvas.add(new fabric.Line([i * canvas.width / rowCount, 0, i * canvas.width / rowCount, canvas.height], {
+                        left: i * canvas.width / rowCount,
+                        top: 0,
+                        stroke: 'red'
+                    }));
+                }
+
+                for (var i = 1; i < cellCount; i++) {
+                    canvas.add(new fabric.Line([0, i * canvas.height / cellCount, canvas.width, i * canvas.height / cellCount], {
+                        left: 0,
+                        top: i * canvas.height / cellCount,
+                        stroke: 'red'
+                    }));
+                }
+
+                jQuery("div[id=image_part]").each(function () {
+                    var pic = this.getElementsByClassName("pic_for_item");
+                    $(pic[0]).draggable({ helper: "clone" });
+                });
+
+                $("#editor").droppable({
+                    drop: function (event, ui) {
+                        var leftMiddle = (ui.offset.left - $(this).offset().left) + (canvas.width / (2 * rowCount));
+                        var topMiddle = (ui.offset.top - $(this).offset().top) + (canvas.height / (2 * cellCount));
+                        var left = leftMiddle - leftMiddle % (canvas.width / rowCount);
+                        var top = topMiddle  - topMiddle % (canvas.height / cellCount);
+                        var picture = ui.draggable;
+                        fabric.util.loadImage(picture.context.src, function(properties, img) {
+                            var object = new fabric.Image(img);
+                            object.set({
+                                left: left,
+                                top: top
+                            });
+                            object.hasRotatingPoint = true;
+                            canvas.add(object);
+                            canvas.renderAll();
+                        }, null, { crossOrigin: "Anonymous" });
+                    }
+                });
+            });
         })
     </script>
 }
