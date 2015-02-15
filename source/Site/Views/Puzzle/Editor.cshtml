@@ -11,35 +11,60 @@
     <script src="~/Scripts/fabric.js"></script>
     <script src="~/Scripts/Puzzle.js"></script>
     <script>
+        var items = [];
         
+
+        function showPopup() {
+            $("#popup1").show();
+        }
+
+        function hidePopup() {
+            $("#popup1").hide();
+        }
+
         $(document).ready(function () {
             $("#puzzle-block").load("/puzzle/get", {"complexity":@Model.Complexity, "pictureId":@Model.PictureId}, function() {
+                hidePopup();
                 var canvas = new fabric.Canvas("editor", {
                     backgroundColor: "#ffffff"
                 });
 
+                
+
                 var rowCount = 0;
                 var cellCount = 0;
                 switch(@Model.Complexity) {
-                    case 1:
-                        rowCount = 4;
-                        cellCount = 3;
-                        break;
-                    case 2:
-                        rowCount = 6;
-                        cellCount = 4;
-                        break;
-                    case 3:
-                        rowCount = 8;
-                        cellCount = 6;
-                        break;
+                case 1:
+                    rowCount = 4;
+                    cellCount = 3;
+                    break;
+                case 2:
+                    rowCount = 6;
+                    cellCount = 4;
+                    break;
+                case 3:
+                    rowCount = 8;
+                    cellCount = 6;
+                    break;
+                }
+
+                var checkPuzzle = function() {
+                    for (var i = 0; i < items.length; i++) {
+                        if (i != items[i]) return false;
+                    }
+                    showPopup();
+                    return true;
+                }
+                
+                for (var i = 0; i < rowCount * cellCount; i++) {
+                    items.push(-1);
                 }
 
                 for (var i = 1; i < rowCount; i++) {
                     canvas.add(new fabric.Line([i * canvas.width / rowCount, 0, i * canvas.width / rowCount, canvas.height], {
                         left: i * canvas.width / rowCount,
                         top: 0,
-                        stroke: 'red'
+                        stroke: "red"
                     }));
                 }
 
@@ -47,7 +72,7 @@
                     canvas.add(new fabric.Line([0, i * canvas.height / cellCount, canvas.width, i * canvas.height / cellCount], {
                         left: 0,
                         top: i * canvas.height / cellCount,
-                        stroke: 'red'
+                        stroke: "red"
                     }));
                 }
 
@@ -73,6 +98,11 @@
                             canvas.add(object);
                             canvas.renderAll();
                         }, null, { crossOrigin: "Anonymous" });
+                        var rows = (top / (canvas.height / cellCount));
+                        var cells = (left / (canvas.width / rowCount));
+                        var place = rows * rowCount + cells;
+                        items[place] = picture.attr('index');
+                        checkPuzzle();
                     }
                 });
             });
