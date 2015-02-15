@@ -36,8 +36,7 @@ namespace Toppuzzle.Model.Managers
             if (GetPictureByPictureId(photo.PhotoId) != null) return;
             var image = GetImageFromUrl(photo.LargeUrl);
             Directory.CreateDirectory(@"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\");
-            image.Save(@"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\" + photo.PhotoId + ".jpg");
-
+            NormalizeAndSaveImage(image, @"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\" + photo.PhotoId + ".jpg");
             SavePicture(new Pictures {
                 PictureId = photo.PhotoId,
                 Picture = photo.PhotoId + ".jpg"
@@ -99,7 +98,23 @@ namespace Toppuzzle.Model.Managers
                 list.Add(n);
             }
             return list;
-        } 
+        }
+
+        public void NormalizeAndSaveImage(Image image, string path)
+        {
+            var width = image.Width - image.Width%48;
+            var height = image.Height - image.Height%24;
+            using (var dst = new Bitmap(width, height, image.PixelFormat))
+            {
+                using (var gfx = Graphics.FromImage(dst))
+                {
+                    var destRect = new Rectangle(0, 0, dst.Width, dst.Height);
+                    var srcRec = new Rectangle(0, 0, dst.Width, dst.Height);
+                    gfx.DrawImage(image, destRect, srcRec, GraphicsUnit.Pixel);
+                }
+                dst.Save(path);
+            }
+        }
 
         public IEnumerable<string> CutImage(Bitmap image, int complexity) {
             var list = new List<string>();
