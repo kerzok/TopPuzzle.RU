@@ -102,14 +102,16 @@ namespace Toppuzzle.Model.Managers
 
         public void NormalizeAndSaveImage(Image image, string path)
         {
-            var width = image.Width - image.Width%48;
-            var height = image.Height - image.Height%24;
+            var modWidth = image.Width%48;
+            var modHeight = image.Height%24;
+            var width = image.Width - modWidth;
+            var height = image.Height - modHeight;
             using (var dst = new Bitmap(width, height, image.PixelFormat))
             {
                 using (var gfx = Graphics.FromImage(dst))
                 {
                     var destRect = new Rectangle(0, 0, dst.Width, dst.Height);
-                    var srcRec = new Rectangle(0, 0, dst.Width, dst.Height);
+                    var srcRec = new Rectangle(modWidth/2, modHeight/2, dst.Width, dst.Height);
                     gfx.DrawImage(image, destRect, srcRec, GraphicsUnit.Pixel);
                 }
                 dst.Save(path);
