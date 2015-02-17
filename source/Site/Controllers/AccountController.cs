@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -10,7 +12,9 @@ using Toppuzzle.Site.Infrastucture;
 using Toppuzzle.Site.Models;
 
 namespace Toppuzzle.Site.Controllers {
-    public class AccountController : Controller {
+    public class AccountController : BaseController {
+        private const int ItemPerPage = 9;
+
         public ViewResult Login() {
             return View();
         }
@@ -65,11 +69,37 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Cabinet() {
             var af = ApplicationFacade.Instance;
             var user = af.GetCurrentUser();
+            
             //var puzzle = af.PuzzleManager.GetPuzzlesByUserId(user.Id);
             return View(new CabinetViewModel {
                 User = user,
                 PuzzlesForUser = null
             });
+        }
+
+        [UserAuthorize]
+        public ActionResult MyPuzzle(int page = 1) {
+            var af = ApplicationFacade.Instance;
+            var scores = af.ScoreManager.GetUserScoreById(af.GetCurrentUser().Id);
+            var pictures = (from score in scores
+                let picture = af.PictureManager.GetPictureByPictureId(score.PictureId)
+                let path = Server.MapPath("~/Content/Puzzles/" + picture.Picture)
+                let image = new Bitmap(path)
+                select new PictureViewModel {
+                    Complexity = score.Complexity,
+                    Id = picture.PictureId,
+                    Height = image.Height,
+                    Source = "~/Content/Puzzles/" + picture.Picture
+                });
+            var picturesList = pictures.Skip((page - 1)*ItemPerPage).ToList();
+            var totalPages = (pictures.Count() / ItemPerPage) + 1;
+            var result = new CatalogViewModel {
+                Pictures = picturesList,
+                CurrentPage = page,
+                PageCount = ApplicationFacade.Instance.PictureManager.GetTotalPages()
+            };
+            var view = RenderViewToString("MyPuzzle", result);
+            return Json(new { view, CurrentPage = page, PageCount = totalPages }, JsonRequestBehavior.AllowGet);
         }
 
         [UserAuthorize]
@@ -125,13 +155,6 @@ namespace Toppuzzle.Site.Controllers {
             ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
             ApplicationFacade.Instance.SetCurrentUser(currentUser);
             return Json(new{data="ok", fileName}, JsonRequestBehavior.AllowGet);
-        }
-
-        [UserAuthorize]
-        public ActionResult MyPuzzle() {
-            var user = ApplicationFacade.Instance.GetCurrentUser();
-            var puzzle = ApplicationFacade.Instance.PuzzleManager.GetPuzzlesByUserId(user.Id);
-            return PartialView(new MyPuzzleViewModel{PuzzlesForUser = puzzle});
         }
 
         private static bool Authenticate(string username, string password) {

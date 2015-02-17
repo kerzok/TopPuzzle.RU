@@ -10,7 +10,7 @@ using Toppuzzle.Site.Infrastucture;
 using Toppuzzle.Site.Models;
 
 namespace Toppuzzle.Site.Controllers {
-    public class PuzzleController : Controller {
+    public class PuzzleController : BaseController {
         // GET: Puzzle
         //public ActionResult Editor() {
         //    return View();
@@ -48,7 +48,7 @@ namespace Toppuzzle.Site.Controllers {
             var score = new Score {
                 Complexity = int.Parse(complexity),
                 Date = DateTime.Today,
-                PictureId = ApplicationFacade.Instance.PictureManager.GetPictureByPictureId(puzzleId).Id,
+                PictureId = puzzleId,
                 Time = int.Parse(time),
                 UserId = user.Id
             };
@@ -56,19 +56,6 @@ namespace Toppuzzle.Site.Controllers {
             ApplicationFacade.Instance.ScoreManager.InsertNewScore(score);
             ApplicationFacade.Instance.UserManager.UpdateUser(user);
             ApplicationFacade.Instance.SetCurrentUser(user);
-        }
-
-        private string RenderViewToString(string viewName, object model) {
-            ViewData.Model = model;
-            using (var sw = new StringWriter()) {
-                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
-                                                                         viewName);
-                var viewContext = new ViewContext(ControllerContext, viewResult.View,
-                                             ViewData, TempData, sw);
-                viewResult.View.Render(viewContext, sw);
-                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
-                return sw.GetStringBuilder().ToString();
-            }
         }
     }
 }
