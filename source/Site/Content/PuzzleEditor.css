@@ -4,3 +4,7 @@
     border-style: solid;
     border-width: 1px;
 }
+
+.canvas-container {
+    display: inline-block;
+}

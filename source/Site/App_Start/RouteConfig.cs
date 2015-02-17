@@ -25,6 +25,7 @@ namespace Toppuzzle.Site {
 
             routes.Map("puzzle", "Puzzle", "Editor");
             routes.Map("puzzle/get", "Puzzle", "GetPicture");
+            routes.Map("puzzle/getresult", "Puzzle", "GetResult", "POST");
             routes.Map("register", "Account", "Register");
             routes.Map("login", "Account", "Login");
             routes.Map("cabinet", "Account", "Cabinet");

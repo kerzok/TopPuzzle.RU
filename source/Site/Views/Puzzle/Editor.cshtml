@@ -12,7 +12,46 @@
     <script src="~/Scripts/Puzzle.js"></script>
     <script>
         var items = [];
+        var startDate;
+        var t;
+
+        Date.prototype.addHours= function(h){
+            this.setHours(this.getHours()+h);
+            return this;
+        }
         
+        function startTime()
+        {
+            var tm=new Date(new Date() - startDate);
+            var h=tm.getHours();
+            var m=tm.getMinutes();
+            var s=tm.getSeconds();
+            m=checkTime(m);
+            s=checkTime(s);
+            document.getElementById("txt").innerHTML=h+":"+m+":"+s;
+            t=setTimeout("startTime()",500);
+        }
+        function checkTime(i)
+        {
+            if (i<10)
+            {
+                i="0" + i;
+            }
+            return i;
+        }
+
+        function stopTime() {
+            var tm = new Date(new Date() - startDate);
+            clearTimeout(t);
+            return tm;
+        }
+
+        function convertDateToInt(date) {
+            var hours = date.getHours() * 3600000;
+            var minutes = date.getMinutes() * 60000;
+            var seconds = date.getSeconds() * 1000;
+            return parseInt(hours + minutes + seconds);
+        }
 
         function showPopup() {
             $("#popup1").show();
@@ -53,6 +92,16 @@
                         if (i != items[i]) return false;
                     }
                     showPopup();
+                    var time = stopTime();
+                    $.ajax("/puzzle/getresult", {
+                        type: "POST",
+                        datatype: "JSON",
+                        data: {
+                            "complexity": @Model.Complexity,
+                            "puzzleId": @Model.PictureId,
+                            "time": convertDateToInt(time)
+                        }
+                    });
                     return true;
                 }
                 
@@ -80,6 +129,9 @@
                     var pic = this.getElementsByClassName("pic_for_item");
                     $(pic[0]).draggable({ helper: "clone" });
                 });
+
+                startDate = new Date().addHours(3);
+                startTime();
 
                 $("#editor").droppable({
                     drop: function (event, ui) {

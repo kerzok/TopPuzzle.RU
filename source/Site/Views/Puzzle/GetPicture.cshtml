@@ -4,7 +4,8 @@
     Layout = null;
 }
 <div class="puzzle">
-    <canvas id="editor" height="@Model.Height" width="@Model.Width" style="border: 2px black solid;"></canvas>
+    <canvas id="editor" height="@Model.Height" width="@Model.Width" style="border: 2px black solid; display: inline-block;"></canvas>
+    <div id="txt" style="display: inline-block; font-size: 30px; position: fixed; right: 10px;"></div>
     <div id="image-parts">
         @foreach (var i in Model.RandomList) {
             <div id="image_part" style="display: inline-block;">
