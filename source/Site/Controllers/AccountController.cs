@@ -89,7 +89,8 @@ namespace Toppuzzle.Site.Controllers {
                     Complexity = score.Complexity,
                     Id = picture.PictureId,
                     Height = image.Height,
-                    Source = "~/Content/Puzzles/" + picture.Picture
+                    Source = "~/Content/Puzzles/" + picture.Picture,
+                    Score = score
                 });
             var picturesList = pictures.Skip((page - 1)*ItemPerPage).ToList();
             var totalPages = (pictures.Count() / ItemPerPage) + 1;

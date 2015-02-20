@@ -17,7 +17,7 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult GetScores(int complexity = 1) {
             var af = ApplicationFacade.Instance;
             var scoresList = af.ScoreManager.GetScores(complexity);
-            var scoresListWithNames = scoresList.Select(score => new Tuple<Score, string>(score, af.UserManager.GetUserNameById(score.UserId))).ToList();
+            var scoresListWithNames = scoresList.Select(score => new Tuple<Score, string, int>(score, af.UserManager.GetUserNameById(score.UserId), af.PictureManager.GetPictureByPictureId(score.PictureId).Id)).ToList();
             return View(new ScoresViewModel { ScoresList = scoresListWithNames });
         }
 

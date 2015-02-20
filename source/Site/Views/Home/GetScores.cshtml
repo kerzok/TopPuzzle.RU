@@ -16,8 +16,8 @@
     {
         <tr>
             <td class="player">@score.Item2</td>
-            <td class="time">@score.Item1.Time</td>
-            <td class="puzzle">@score.Item1.PictureId</td>
+            <td class="time">@(new TimeSpan(score.Item1.Time * 10000).ToString().Substring(0, 8))</td>
+            <td class="puzzle">@score.Item3</td>
             <td class="date">@score.Item1.Date.ToShortDateString()</td>
         </tr>
     }

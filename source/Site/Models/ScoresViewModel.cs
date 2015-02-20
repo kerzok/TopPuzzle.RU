@@ -4,6 +4,6 @@ using Toppuzzle.Model.Entities;
 
 namespace Toppuzzle.Site.Models {
     public class ScoresViewModel : BaseViewModel {
-        public List<Tuple<Score, string>> ScoresList { get; set; }
+        public List<Tuple<Score, string, int>> ScoresList { get; set; }
     }
 }

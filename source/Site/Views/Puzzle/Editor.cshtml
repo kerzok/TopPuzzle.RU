@@ -88,7 +88,7 @@
                 }
 
                 var checkPuzzle = function() {
-                    for (var i = 0; i < items.length; i++) {
+                    for (var i = 0; i < rowCount * cellCount; i++) {
                         if (i != items[i]) return false;
                     }
                     showPopup();
@@ -128,6 +128,11 @@
                 jQuery("div[id=image_part]").each(function () {
                     var pic = this.getElementsByClassName("pic_for_item");
                     $(pic[0]).draggable({ helper: "clone" });
+                });
+
+                $("#close-btn").click(function() {
+                    hidePopup();
+                    window.location.href = "/cabinet";
                 });
 
                 startDate = new Date().addHours(3);
