@@ -101,9 +101,8 @@ namespace Toppuzzle.Model.Managers
 
         public void NormalizeAndSaveImage(Image image, string path)
         {
-            int modWidth = 0, modHeight = 0;
-            if (image.Width > 960) modWidth = image.Width%960;
-            if (image.Height > 720) modHeight = image.Height%720;
+            var modWidth = image.Width%48;
+            var modHeight = image.Height%24;
             var width = image.Width - modWidth;
             var height = image.Height - modHeight;
             using (var dst = new Bitmap(width, height, image.PixelFormat))
