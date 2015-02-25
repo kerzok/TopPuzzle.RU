@@ -30,7 +30,6 @@ namespace Toppuzzle.Model.Managers
                 Tags = "city"
             };
 
-            
             var photos = _api.PhotosSearch(options);
             var photo = photos[0];
             if (GetPictureByPictureId(photo.PhotoId) != null) return;
@@ -102,8 +101,9 @@ namespace Toppuzzle.Model.Managers
 
         public void NormalizeAndSaveImage(Image image, string path)
         {
-            var modWidth = image.Width%48;
-            var modHeight = image.Height%24;
+            int modWidth = 0, modHeight = 0;
+            if (image.Width > 960) modWidth = image.Width%960;
+            if (image.Height > 720) modHeight = image.Height%720;
             var width = image.Width - modWidth;
             var height = image.Height - modHeight;
             using (var dst = new Bitmap(width, height, image.PixelFormat))
