@@ -30,7 +30,6 @@ namespace Toppuzzle.Model.Managers
                 Tags = "city"
             };
 
-            
             var photos = _api.PhotosSearch(options);
             var photo = photos[0];
             var currentPicture = GetPictureByPictureId(photo.PhotoId);
