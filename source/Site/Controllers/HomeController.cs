@@ -38,9 +38,8 @@ namespace Toppuzzle.Site.Controllers {
             return Json(new { view, CurrentPage = page, PageCount = ApplicationFacade.Instance.PictureManager.GetTotalPages()});
         }
 
-        [HttpPost]
-        public void Random() {
-            ApplicationFacade.Instance.PictureManager.GetRandomPicture();
+        public ActionResult Random() {
+            return Json(new{pictureId = ApplicationFacade.Instance.PictureManager.GetRandomPicture().PictureId}, JsonRequestBehavior.AllowGet);
         }        
     }
 }

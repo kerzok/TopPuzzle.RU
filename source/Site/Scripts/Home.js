@@ -78,9 +78,17 @@ $(document).ready(function () {
     getDataToCatalog(1);
 
     $("#random").click(function () {
-        $.post("/home/random", null, function() {
-            $("#random").removeAttr("disabled");
-            getDataToCatalog(lastCurrentPage);
+        $.ajax("/home/random", {
+            type: "POST",
+            beforeSend: function() {
+                $("#random").attr("disabled", "disabled");
+            },
+            success: function(data) {
+                $("#random").removeAttr("disabled");
+                getDataToCatalog(lastCurrentPage);
+                showPopup();
+                pictureId = data.pictureId;
+            }
         });
     });
 

@@ -9,7 +9,7 @@
     <div id="catalog">
         @foreach (var picture in Model.Pictures) {
             <div class="item main_page_prewiew" id="media" picture_id="@picture.Id">
-                <img src="@Url.Content(picture.Source)" width="200" height="113" title="Собран на уровне @picture.Complexity за @(new TimeSpan(picture.Score.Time * 10000).ToString().Substring(0, 8))"/>               
+                <img src="@Url.Content(picture.Source)" width="200" height="113" title="Собран на @(picture.Complexity == 1 ? "легком" : (picture.Complexity == 2 ? "среднем" : "сложном")) уровне за @(new TimeSpan(picture.Score.Time * 10000).ToString().Substring(0, 8))" />               
             </div>
         }
     </div>

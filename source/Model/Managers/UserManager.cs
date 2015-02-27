@@ -39,7 +39,7 @@ namespace Toppuzzle.Model.Managers {
         }
 
         public void UpdateUser(User user) {
-            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, user.Password, user.Avatar, user.HasAvatar});
+            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, user.Password, user.Avatar, user.HasAvatar, user.Rating});
         }
     }
 }

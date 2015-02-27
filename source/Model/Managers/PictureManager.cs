@@ -20,7 +20,7 @@ namespace Toppuzzle.Model.Managers
             _api = new Flickr("b7174fdfb7f58dde37f98791c9c725f9", "96080f898b0da2e3") {InstanceCacheDisabled = true};
         }
 
-        public void GetRandomPicture() {
+        public Pictures GetRandomPicture() {
             var options = new PhotoSearchOptions {
                 PerPage = 12,
                 Page = 1,
@@ -33,11 +33,12 @@ namespace Toppuzzle.Model.Managers
             
             var photos = _api.PhotosSearch(options);
             var photo = photos[0];
-            if (GetPictureByPictureId(photo.PhotoId) != null) return;
+            var currentPicture = GetPictureByPictureId(photo.PhotoId);
+            if (currentPicture != null) return currentPicture;
             var image = GetImageFromUrl(photo.LargeUrl);
             Directory.CreateDirectory(@"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\");
             NormalizeAndSaveImage(image, @"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\" + photo.PhotoId + ".jpg");
-            SavePicture(new Pictures {
+            return SavePicture(new Pictures {
                 PictureId = photo.PhotoId,
                 Picture = photo.PhotoId + ".jpg"
             });
@@ -52,8 +53,8 @@ namespace Toppuzzle.Model.Managers
             return databaseResult % ItemsPerPage == 0 ? databaseResult / ItemsPerPage : (databaseResult / ItemsPerPage) + 1;
         }
 
-        public void SavePicture(Pictures picture) {
-            SqlMapper.Execute("SavePicture", new { picture.PictureId, picture.Picture});
+        public Pictures SavePicture(Pictures picture) {
+            return SqlMapper.Execute<Pictures>("SavePicture", new { picture.PictureId, picture.Picture}).SingleOrDefault();
         }
 
         public IEnumerable<Pictures> GetAllPictures(int page) {
