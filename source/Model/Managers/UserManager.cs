@@ -9,9 +9,9 @@ namespace Toppuzzle.Model.Managers {
             : base(sqlMapeer) {
         }
 
-        public User InsertAccountToDatabase(User user) {
+        public User InsertUser(User user) {
             return
-                SqlMapper.Execute<User>("InsertNewUser", new {user.UserName, user.Password, user.Email})
+                SqlMapper.Execute<User>("InsertUser", new {user.UserName, user.Password, user.Email})
                     .FirstOrDefault();
         }
 
@@ -32,10 +32,6 @@ namespace Toppuzzle.Model.Managers {
 
         public User GetUserAccountByEmail(string email) {
             return SqlMapper.Execute<User>("GetUserByEmail", email).FirstOrDefault();
-        }
-
-        public string GetUserNameById(int id) {
-            return SqlMapper.Execute<string>("GetUserNameById", new { id }).FirstOrDefault();
         }
 
         public void UpdateUser(User user) {

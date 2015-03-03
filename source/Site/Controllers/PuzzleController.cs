@@ -11,18 +11,13 @@ using Toppuzzle.Site.Models;
 
 namespace Toppuzzle.Site.Controllers {
     public class PuzzleController : BaseController {
-
-        public ActionResult Editor(string pictureId, int complexity) {
-            return View(new EditorViewModel{Complexity = complexity, PictureId = pictureId});
-        }
-
-        public ActionResult GetPicture(string pictureId, int complexity) {
-            return View(new PictureModel().GetPicture(pictureId, complexity));
+        public ActionResult Editor(PictureModel model) {
+            return View(model.GetPicture());
         }
 
         [HttpPost]
-        public void SaveScore(string time, string complexity, string puzzleId) {
-            new ScoreModel().SaveScore(time, complexity, puzzleId);
+        public void SaveScore(ScoreModel model) {
+            model.SaveScore();
         }
     }
 }

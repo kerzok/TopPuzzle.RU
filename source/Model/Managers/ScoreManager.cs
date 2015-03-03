@@ -12,12 +12,12 @@ namespace Toppuzzle.Model.Managers {
             return SqlMapper.Execute<Score>("GetScores", new {complexity});
         }
 
-        public IEnumerable<Score> GetUserScoreById(int id) {
-            return SqlMapper.Execute<Score>("GetUserScoreById", new { id });
+        public IEnumerable<Score> GetUserScoreById(int userId) {
+            return SqlMapper.Execute<Score>("GetUserScoreById", new { userId });
         }
 
-        public void InsertNewScore(Score score) {
-            SqlMapper.Execute("InsertNewScore", score);
+        public void InsertScore(Score score) {
+            SqlMapper.Execute("InsertScore", score);
         }
     }
 }

@@ -8,7 +8,7 @@ using Toppuzzle.Model.Entities;
 using Toppuzzle.Site.Infrastucture;
 
 namespace Toppuzzle.Site.Models {
-    public class RegisterViewModel {
+    public class RegisterModel {
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Логин")]
@@ -32,7 +32,7 @@ namespace Toppuzzle.Site.Models {
         public KeyValuePair<string, string> Error;
         public bool HasError { get; private set; }
 
-        public RegisterViewModel RegisterNewUser() {
+        public RegisterModel RegisterNewUser() {
             var af = ApplicationFacade.Instance;
             var user = af.UserManager.GetUserByLogin(Login);
             if (user != null) {
@@ -46,7 +46,7 @@ namespace Toppuzzle.Site.Models {
                 return this;
             }
 
-            user = af.UserManager.InsertAccountToDatabase(new User {
+            user = af.UserManager.InsertUser(new User {
                 Email = Email,
                 Password = Password,
                 UserName = Login
@@ -98,7 +98,7 @@ namespace Toppuzzle.Site.Models {
             return this;
         }
 
-        public string ChangeAvatar(HttpPostedFileBase file) {
+        public static string ChangeAvatar(HttpPostedFileBase file) {
             var currentUser = ApplicationFacade.Instance.GetCurrentUser();
             var folderPath = HostingEnvironment.ApplicationPhysicalPath + "Content/Users/" + currentUser.Id + "/";
             if (Directory.Exists(folderPath)) {

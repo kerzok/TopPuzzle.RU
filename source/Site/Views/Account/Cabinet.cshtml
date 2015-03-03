@@ -1,10 +1,11 @@
-﻿@{
+﻿@using Toppuzzle.Site.Infrastucture
+@{
     ViewBag.Title = "Кабинет";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section scripts {
-    <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery/jquery-2.1.3.js"></script>
     <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
     <script src="~/Scripts/Cabinet.js"></script>
 }
@@ -22,10 +23,13 @@
         }
     </div>
     <div id="user-info-and-settings">
+        <input type="hidden" value="@ViewBag.User.Id" id="user-id"/>
         <h3>@ViewBag.User.UserName</h3>
         <div id="rating">Рейтинг: @ViewBag.User.Rating</div>
         <div id="my-puzzle" class="btn btn-default">Мои пазлы</div>
-        <div id="settings" class="btn btn-default">Настройки</div>
+        @if (ApplicationFacade.Instance.GetCurrentUser() != null && ViewBag.User.Id == ApplicationFacade.Instance.GetCurrentUser().Id) {
+            <div id="settings" class="btn btn-default">Настройки</div>
+        }
     </div>
 </div>
 <div id="partial"></div>

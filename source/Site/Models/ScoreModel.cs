@@ -6,29 +6,36 @@ using Toppuzzle.Site.Infrastucture;
 
 namespace Toppuzzle.Site.Models {
     public class ScoreModel : BaseModel {
-        public List<Tuple<Score, string, int>> ScoresList { get; set; }
+        public User User { get; set; }
+        public int Time { get; set; }
+        public int PictureId { get; set; }
+        public DateTime Date { get; set; }
+        public int Complexity { get; set; }
 
-        public ScoreModel GetScores(int complexity) {
+        public static List<ScoreModel> GetScores(int complexity) {
             var af = ApplicationFacade.Instance;
             var scoresList = af.ScoreManager.GetScores(complexity);
-            ScoresList = scoresList.Select(score => new Tuple<Score, string, int>(score, 
-                af.UserManager.GetUserNameById(score.UserId), 
-                af.PictureManager.GetPictureByPictureId(score.PictureId).Id)).ToList();
-            return this;
+            var result = scoresList.Select(score => new ScoreModel {
+                Date = score.Date,
+                User = af.UserManager.GetUserById(score.UserId),
+                PictureId = score.PictureId,
+                Time = score.Time
+            }).ToList();
+            return result;
         }
 
-        public void SaveScore(string time, string complexity, string puzzleId) {
+        public void SaveScore() {
             var user = ApplicationFacade.Instance.GetCurrentUser();
             if (user == null) return;
             var score = new Score {
-                Complexity = int.Parse(complexity),
+                Complexity = Complexity,
                 Date = DateTime.Today,
-                PictureId = puzzleId,
-                Time = int.Parse(time),
+                PictureId = PictureId,
+                Time = Time,
                 UserId = user.Id
             };
             user.Rating += score.Complexity * 20;
-            ApplicationFacade.Instance.ScoreManager.InsertNewScore(score);
+            ApplicationFacade.Instance.ScoreManager.InsertScore(score);
             ApplicationFacade.Instance.UserManager.UpdateUser(user);
             ApplicationFacade.Instance.SetCurrentUser(user);
         }

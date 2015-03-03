@@ -22,43 +22,48 @@ namespace Toppuzzle.Model.Managers
         }
 
         public Pictures GetRandomPicture() {
+            var random = new Random();
             var options = new PhotoSearchOptions {
                 PerPage = 12,
                 Page = 1,
                 SortOrder = PhotoSearchSortOrder.DatePostedDescending,
                 MediaType = MediaType.Photos,
                 SafeSearch = SafetyLevel.Safe,
-                Tags = "city"
+                Tags = "city, car, nature, supercars"
             };
 
             var photos = _api.PhotosSearch(options);
-            var photo = photos[0];
+            var photo = photos[random.Next(photos.Count - 1)];
             var currentPicture = GetPictureByPictureId(photo.PhotoId);
             if (currentPicture != null) return currentPicture;
             var image = GetImageFromUrl(photo.LargeUrl);
             Directory.CreateDirectory(HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\");
             NormalizeAndSaveImage(image, HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\" + photo.PhotoId + ".jpg");
-            return SavePicture(new Pictures {
+            return InsertPicture(new Pictures {
                 PictureId = photo.PhotoId,
                 Picture = photo.PhotoId + ".jpg"
             });
         }
 
-        public Pictures GetPictureByPictureId(string id) {
-            return SqlMapper.Execute<Pictures>("GetPictureByPictureId", new { Id = id }).SingleOrDefault();
+        public Pictures GetPictureByPictureId(string pictureId) {
+            return SqlMapper.Execute<Pictures>("GetPictureByPictureId", new { pictureId }).SingleOrDefault();
         }
 
         public int GetTotalPages() {
-            var databaseResult = SqlMapper.Execute<int>("GetTotalPicturesCount").SingleOrDefault();
+            var databaseResult = SqlMapper.Execute<int>("GetPicturesCount").SingleOrDefault();
             return databaseResult % ItemsPerPage == 0 ? databaseResult / ItemsPerPage : (databaseResult / ItemsPerPage) + 1;
         }
 
-        public Pictures SavePicture(Pictures picture) {
-            return SqlMapper.Execute<Pictures>("SavePicture", new { picture.PictureId, picture.Picture}).SingleOrDefault();
+        public Pictures InsertPicture(Pictures picture) {
+            return SqlMapper.Execute<Pictures>("InsertPicture", new { picture.PictureId, picture.Picture}).SingleOrDefault();
         }
 
-        public IEnumerable<Pictures> GetAllPictures(int page) {
-            return SqlMapper.Execute<Pictures>("GetAllPictures", new {startRowIndex = page*ItemsPerPage, maximumIndex = ItemsPerPage});
+        public Pictures GetPictureById(int id) {
+            return SqlMapper.Execute<Pictures>("GetPictureById", new {id}).SingleOrDefault();
+        }
+
+        public IEnumerable<Pictures> GetPictures(int page) {
+            return SqlMapper.Execute<Pictures>("GetPictures", new {startRowIndex = page*ItemsPerPage, maximumIndex = ItemsPerPage});
         }  
 
         private static Image GetImageFromUrl(string url) {

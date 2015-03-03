@@ -14,18 +14,17 @@ namespace Toppuzzle.Site.Controllers {
         }
 
         public ActionResult GetScores(int complexity = 1) {
-            return View(new ScoreModel().GetScores(complexity));
+            return View(ScoreModel.GetScores(complexity));
         }
 
-        public ActionResult Catalog(int page = 1) {
-            var model = new CatalogModel().GetCatalogForMainPage(page);
-            var view = RenderViewToString("Catalog", model);
-            return Json(new { view, CurrentPage = page, model.PageCount });
+        public ActionResult Catalog(CatalogModel model) {
+            var view = RenderViewToString("Catalog", model.GetCatalogForMainPage());
+            return Json(new { view, model.CurrentPage, model.PageCount });
         }
 
         public ActionResult Random() {
             return Json(new {
-                pictureId = ApplicationFacade.Instance.PictureManager.GetRandomPicture().PictureId
+                Id = ApplicationFacade.Instance.PictureManager.GetRandomPicture().Id
             }, JsonRequestBehavior.AllowGet);
         }
     }

@@ -36,7 +36,7 @@ namespace Toppuzzle.Site.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model) {
+        public ActionResult Register(RegisterModel model) {
             if (!ModelState.IsValid) return View(model);
             model = model.RegisterNewUser();
             if (!model.HasError) return RedirectToAction("Index", "Home");
@@ -50,17 +50,16 @@ namespace Toppuzzle.Site.Controllers {
             return RedirectToAction("Index", "Home");
         }
 
-        [UserAuthorize]
-        public ActionResult Cabinet() {
-            ViewBag.User = ApplicationFacade.Instance.GetCurrentUser();
+        public ActionResult Cabinet(int? userId) {
+            if (!userId.HasValue) userId = ApplicationFacade.Instance.GetCurrentUser().Id;
+            ViewBag.User = ApplicationFacade.Instance.UserManager.GetUserById(userId.Value);
             return View();
         }
 
-        [UserAuthorize]
-        public ActionResult MyPuzzle(int page = 1) {
-            var model = new CatalogModel().GetCatalogForCabinet(page);
+        public ActionResult MyPuzzle(CatalogModel model) {
+            model.GetCatalogForCabinet();
             var view = RenderViewToString("MyPuzzle", model);
-            return Json(new { view, CurrentPage = page, model.PageCount }, JsonRequestBehavior.AllowGet);
+            return Json(new { view, model.CurrentPage, model.PageCount }, JsonRequestBehavior.AllowGet);
         }
 
         [UserAuthorize]
@@ -95,7 +94,7 @@ namespace Toppuzzle.Site.Controllers {
             if (Request.Files.Count <= 0) return PartialView();
             var file = Request.Files[0];
             if (file == null || file.ContentLength <= 0) return PartialView();
-            return Json(new{data="ok", fileName = new ChangeUserDataModel().ChangeAvatar(file)}, JsonRequestBehavior.AllowGet);
+            return Json(new{data="ok", fileName = ChangeUserDataModel.ChangeAvatar(file)}, JsonRequestBehavior.AllowGet);
         }
     }
 }

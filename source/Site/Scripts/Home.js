@@ -53,15 +53,15 @@ var getDataToCatalog = function(page) {
         url: "/home/getdata",
         type: "POST",
         datatype: "JSON",
-        data: { page: page},
+        data: { CurrentPage: page},
         success: function (data) {
             $("#catalog").empty();
             $("#catalog").append(data.view);
             fillPager(data.PageCount, data.CurrentPage);
             jQuery("div[id=media]").each(function () {
                 $(this).click(function() {
-                    showPopup();
                     pictureId = $(this).attr("picture_id");
+                    showPopup();
                 });
             });
             $(".pagerNumber").click(function (e) {
@@ -86,8 +86,8 @@ $(document).ready(function () {
             success: function(data) {
                 $("#random").removeAttr("disabled");
                 getDataToCatalog(lastCurrentPage);
-                showPopup();
-                pictureId = data.pictureId;
+                pictureId = data.Id;
+                showPopup();               
             }
         });
     });
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
     $("#easy, #medium, #hard").click(function() {
         var complexity = $(this).attr("complexity");
-        window.location.href = "puzzle?complexity=" + complexity + "&pictureId=" + pictureId;
+        window.location.href = "puzzle?Complexity=" + complexity + "&Id=" + pictureId;
     });
 
     $("#close-btn").click(function() {

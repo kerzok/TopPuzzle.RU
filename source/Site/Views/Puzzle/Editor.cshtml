@@ -1,4 +1,4 @@
-﻿@model Toppuzzle.Site.Models.EditorViewModel
+﻿@model Toppuzzle.Site.Models.PictureModel
 
 @{
     ViewBag.Title = "title";
@@ -6,171 +6,36 @@
 }
 
 @section scripts {
-    <script src="~/Scripts/jquery/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery/jquery-2.1.3.js"></script>
     <script src="~/Scripts/jquery-ui/jquery-ui.js"></script>
     <script src="~/Scripts/fabric.js"></script>
     <script src="~/Scripts/Puzzle.js"></script>
-    <script>
-        var items = [];
-        var startDate;
-        var t;
-
-        Date.prototype.addHours= function(h){
-            this.setHours(this.getHours()+h);
-            return this;
-        };
-
-        function startTime()
-        {
-            var tm=new Date(new Date() - startDate);
-            var h=tm.getHours();
-            var m=tm.getMinutes();
-            var s=tm.getSeconds();
-            m=checkTime(m);
-            s=checkTime(s);
-            document.getElementById("txt").innerHTML=h+":"+m+":"+s;
-            t=setTimeout("startTime()",500);
-        }
-        function checkTime(i)
-        {
-            if (i<10)
-            {
-                i="0" + i;
-            }
-            return i;
-        }
-
-        function stopTime() {
-            var tm = new Date(new Date() - startDate);
-            clearTimeout(t);
-            return tm;
-        }
-
-        function convertDateToInt(date) {
-            var hours = date.getHours() * 3600000;
-            var minutes = date.getMinutes() * 60000;
-            var seconds = date.getSeconds() * 1000;
-            return parseInt(hours + minutes + seconds);
-        }
-
-        function showPopup() {
-            $("#popup1").show();
-        }
-
-        function hidePopup() {
-            $("#popup1").hide();
-        }
-
-        $(document).ready(function() {
-            $("#puzzle-block").load("/puzzle/get", { "complexity": @Model.Complexity, "pictureId": @Model.PictureId }, function() {
-                hidePopup();
-                var canvas = new fabric.Canvas("editor", {
-                    backgroundColor: "#ffffff"
-                });
-
-
-                var rowCount = 0;
-                var cellCount = 0;
-                switch (@Model.Complexity) {
-                    case 1:
-                        rowCount = 4;
-                        cellCount = 3;
-                        break;
-                    case 2:
-                        rowCount = 6;
-                        cellCount = 4;
-                        break;
-                    case 3:
-                        rowCount = 8;
-                        cellCount = 6;
-                        break;
-                }
-
-                var checkPuzzle = function() {
-                    for (var i = 0; i < rowCount * cellCount; i++) {
-                        if (i != items[i]) return false;
-                    }
-                    showPopup();
-                    var time = stopTime();
-                    $.ajax("/puzzle/getresult", {
-                        type: "POST",
-                        datatype: "JSON",
-                        data: {
-                            "complexity": @Model.Complexity,
-                            "puzzleId": @Model.PictureId,
-                            "time": convertDateToInt(time)
-                        }
-                    });
-                    return true;
-                };
-                for (var i = 0; i < rowCount * cellCount; i++) {
-                    items.push(-1);
-                }
-
-                for (var i = 1; i < rowCount; i++) {
-                    canvas.add(new fabric.Line([i * canvas.width / rowCount, 0, i * canvas.width / rowCount, canvas.height], {
-                        left: i * canvas.width / rowCount,
-                        top: 0,
-                        stroke: "red"
-                    }));
-                }
-
-                for (var i = 1; i < cellCount; i++) {
-                    canvas.add(new fabric.Line([0, i * canvas.height / cellCount, canvas.width, i * canvas.height / cellCount], {
-                        left: 0,
-                        top: i * canvas.height / cellCount,
-                        stroke: "red"
-                    }));
-                }
-
-                jQuery("div[id=image_part]").each(function() {
-                    var pic = this.getElementsByClassName("pic_for_item");
-                    $(pic[0]).draggable({ helper: "clone" });
-                });
-
-                $("#close-btn").click(function() {
-                    hidePopup();
-                    window.location.href = "/cabinet";
-                });
-
-                startDate = new Date().addHours(3);
-                startTime();
-
-                $("#editor").droppable({
-                    drop: function(event, ui) {
-                        var leftMiddle = (ui.offset.left - $(this).offset().left) + (canvas.width / (2 * rowCount));
-                        var topMiddle = (ui.offset.top - $(this).offset().top) + (canvas.height / (2 * cellCount));
-                        var left = leftMiddle - leftMiddle % (canvas.width / rowCount);
-                        var top = topMiddle - topMiddle % (canvas.height / cellCount);
-                        var picture = ui.draggable;
-                        fabric.util.loadImage(picture.context.src, function(properties, img) {
-                            var object = new fabric.Image(img);
-                            object.set({
-                                left: left,
-                                top: top
-                            });
-                            object.hasRotatingPoint = false;
-                            object.lockMovementX = true;
-                            object.lockMovementY = true;
-                            object.hasControls = false;
-                            object.hasBorders = false;
-                            canvas.add(object);
-                            canvas.renderAll();
-                        }, null, { crossOrigin: "Anonymous" });
-                        var rows = (top / (canvas.height / cellCount));
-                        var cells = (left / (canvas.width / rowCount));
-                        var place = rows * rowCount + cells;
-                        items[place] = picture.attr('index');
-                        checkPuzzle();
-                    }
-                });
-            });
-        });
-    </script>
 }
 
 @section styles{
     <link href="~/Content/PuzzleEditor.css" rel="stylesheet"/>
 }
+<div id="model-data" hidden="hidden" complexity="@Model.Complexity" pictureId="@Model.Id"></div>
+<div id="puzzle-block">
+    <div class="puzzle">
+        <canvas id="editor" height="@Model.Height" width="@Model.Width" style="border: 2px black solid; display: inline-block;"></canvas>
+        <div id="txt" style="display: inline-block; font-size: 30px; position: fixed; right: 10px;"></div>
+        <div style="position: fixed; right: 10px; top: 169px;">
+            <img src="@Url.Content(Model.Source)" alt="" width="@(Model.Width/4)" height="@(Model.Height/4)" style="border: #000000; border-style: double;" />
+        </div>
+        <div id="image-parts" style="background: #ffffff; bottom: 0px; left: 0px; right: 0px; overflow-x: scroll; overflow-y: hidden; white-space: nowrap; word-wrap: normal; ">
+            @foreach (var i in Model.RandomList) {
+                <div id="image_part" style="display: inline-block;">
+                    <img src="data:image/png;base64,@Model.Parts.ElementAt(i)" alt="" class="pic_for_item" index="@i" width="@(Model.Width / (Model.Complexity == 1 ? 4 : (Model.Complexity == 2 ? 6 : 8)))" height="@(Model.Height / (Model.Complexity == 1 ? 3 : (Model.Complexity == 2 ? 4 : 6)))" style="display: inline-block; margin: 5px; border: #FA6A04; border-style: double; " />
+                </div>
+            }
+        </div>
+    </div>
 
-<div id="puzzle-block"></div>
+    <div class="complexity-popup" id="popup1" style="display: none">
+        <div class="popup-content">
+            <div id="close-btn">✖</div>
+            <div>Поздравляем, вы успешно собрали пазл!</div>
+        </div>
+    </div>
+</div>

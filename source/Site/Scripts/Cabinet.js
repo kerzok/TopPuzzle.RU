@@ -41,11 +41,12 @@ function fillPager(pageCount, currentPage) {
 }
 
 var getDataToCatalog = function (page) {
+    var userId = $("#user-id").val();
     $.ajax({
         url: "/cabinet/default",
         type: "POST",
         datatype: "JSON",
-        data: { page: page },
+        data: { CurrentPage: page, UserId: userId },
         success: function (data) {
             $("#partial").empty();
             $("#partial").append(data.view);
