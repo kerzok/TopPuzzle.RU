@@ -35,7 +35,6 @@
 
     <div class="complexity-popup" id="popup1" style="display: none">
         <div class="popup-content">
-            <div id="close-btn">✖</div>
             <div>Поздравляем, вы успешно собрали пазл!</div>
             @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "editor-form", role = "form" })) {
                 <input type="hidden" name="Complexity" class="Complexity" />

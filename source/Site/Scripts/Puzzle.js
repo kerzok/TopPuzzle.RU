@@ -119,11 +119,6 @@ $(document).ready(function() {
         $(pic[0]).draggable({ helper: "clone" });
     });
 
-    $("#close-btn").click(function() {
-        hidePopup();
-        window.location.href = "/cabinet";
-    });
-
     startDate = new Date().addHours(3);
     startTime();
 
