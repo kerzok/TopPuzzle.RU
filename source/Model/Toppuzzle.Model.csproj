@@ -52,7 +52,6 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Score.cs" />
     <Compile Include="Managers\PictureManager.cs" />
-    <Compile Include="Managers\PuzzleManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\ScoreManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
