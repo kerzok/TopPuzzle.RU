@@ -92,16 +92,6 @@ $(document).ready(function() {
             });
             return true;
         });
-
-        //$.ajax("/puzzle/getresult", {
-        //    type: "POST",
-        //    datatype: "JSON",
-        //    data: {
-        //        "Complexity": complexity,
-        //        "PictureId": pictureId,
-        //        "Time": convertDateToInt(time)
-        //    }
-        //});
         return true;
     };
     for (var i = 0; i < rowCount * cellCount; i++) {

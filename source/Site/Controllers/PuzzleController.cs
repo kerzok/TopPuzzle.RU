@@ -14,10 +14,5 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Editor(PictureModel model) {
             return View(model.GetPicture());
         }
-
-        [HttpPost]
-        public void SaveScore(ScoreModel model) {
-            model.SaveScore();
-        }
     }
 }
