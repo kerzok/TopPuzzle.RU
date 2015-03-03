@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web.Hosting;
 using Dapper;
 using FlickrNet;
 using Toppuzzle.Model.DataMapping;
@@ -35,8 +36,8 @@ namespace Toppuzzle.Model.Managers
             var currentPicture = GetPictureByPictureId(photo.PhotoId);
             if (currentPicture != null) return currentPicture;
             var image = GetImageFromUrl(photo.LargeUrl);
-            Directory.CreateDirectory(@"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\");
-            NormalizeAndSaveImage(image, @"C:\TopPuzzle\TopPuzzle.RU\source\Site\Content\Puzzles\" + photo.PhotoId + ".jpg");
+            Directory.CreateDirectory(HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\");
+            NormalizeAndSaveImage(image, HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\" + photo.PhotoId + ".jpg");
             return SavePicture(new Pictures {
                 PictureId = photo.PhotoId,
                 Picture = photo.PhotoId + ".jpg"

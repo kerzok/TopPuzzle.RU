@@ -65,3 +65,4 @@ C:\TopPuzzle\TopPuzzle.RU\source\Site\bin\ru\System.Web.WebPages.Deployment.reso
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Toppuzzle.Site.csprojResolveAssemblyReference.cache
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Site.dll
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Site.pdb
+D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\FlickrNet.dll

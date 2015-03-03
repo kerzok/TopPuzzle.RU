@@ -13,50 +13,35 @@ using Toppuzzle.Site.Models;
 
 namespace Toppuzzle.Site.Controllers {
     public class AccountController : BaseController {
-        private const int ItemPerPage = 9;
+        
 
         public ViewResult Login() {
             return View();
         }
-
-        [HttpPost]
-        public ActionResult Login(BaseViewModel model, string returnUrl) {
-            if (!ModelState.IsValid) return View();
-            if (Authenticate(model.Login, model.Password)) {
-                return Redirect(!String.IsNullOrEmpty(returnUrl) ? returnUrl : new Page().ResolveUrl("~/"));
-            }
-            ModelState.AddModelError("", "Неверный логин или пароль");
-            return View();
-        }
-
         public ActionResult Register() {
             return View();
         }
 
         [HttpPost]
+        public ActionResult Login(BaseModel model, string returnUrl) {
+            if (!ModelState.IsValid) return View();
+            if (model.Authenticate()) {
+                if (!String.IsNullOrEmpty(returnUrl)) {
+                    return Redirect(returnUrl);
+                }
+                return RedirectToAction("Cabinet");
+            }
+            ModelState.AddModelError("", "Неверный логин или пароль");
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Register(RegisterViewModel model) {
-            if (!ModelState.IsValid) {
-                return View(model);
-            }
-            var af = ApplicationFacade.Instance;
-            var user = af.UserManager.GetUserByLogin(model.Login);
-            if (user != null) {
-                ModelState.AddModelError("UserLogin", "Пользователь с таким логином уже существует");
-                return View(model);
-            }
-            if (!model.Password.Equals(model.ConfirmPassword)) {
-                ModelState.AddModelError("RepeatPassword", "Пароли не совпадает");
-                return View(model);
-            }
-
-            user = af.UserManager.InsertAccountToDatabase(new User {
-                Email = model.Email,
-                Password = model.Password,
-                UserName = model.Login
-            });
-            af.SetCurrentUser(user);
-
-            return RedirectToAction("Index", "Home");
+            if (!ModelState.IsValid) return View(model);
+            model = model.RegisterNewUser();
+            if (!model.HasError) return RedirectToAction("Index", "Home");
+            ModelState.AddModelError(model.Error.Key, model.Error.Value);
+            return View(model);
         }
 
         [UserAuthorize]
@@ -67,40 +52,15 @@ namespace Toppuzzle.Site.Controllers {
 
         [UserAuthorize]
         public ActionResult Cabinet() {
-            var af = ApplicationFacade.Instance;
-            var user = af.GetCurrentUser();
-            
-            //var puzzle = af.PuzzleManager.GetPuzzlesByUserId(user.Id);
-            return View(new CabinetViewModel {
-                User = user,
-                PuzzlesForUser = null
-            });
+            ViewBag.User = ApplicationFacade.Instance.GetCurrentUser();
+            return View();
         }
 
         [UserAuthorize]
         public ActionResult MyPuzzle(int page = 1) {
-            var af = ApplicationFacade.Instance;
-            var scores = af.ScoreManager.GetUserScoreById(af.GetCurrentUser().Id);
-            var pictures = (from score in scores
-                let picture = af.PictureManager.GetPictureByPictureId(score.PictureId)
-                let path = Server.MapPath("~/Content/Puzzles/" + picture.Picture)
-                let image = new Bitmap(path)
-                select new PictureViewModel {
-                    Complexity = score.Complexity,
-                    Id = picture.PictureId,
-                    Height = image.Height,
-                    Source = "~/Content/Puzzles/" + picture.Picture,
-                    Score = score
-                });
-            var picturesList = pictures.Skip((page - 1)*ItemPerPage).ToList();
-            var totalPages = (pictures.Count() / ItemPerPage) + 1;
-            var result = new CatalogViewModel {
-                Pictures = picturesList,
-                CurrentPage = page,
-                PageCount = ApplicationFacade.Instance.PictureManager.GetTotalPages()
-            };
-            var view = RenderViewToString("MyPuzzle", result);
-            return Json(new { view, CurrentPage = page, PageCount = totalPages }, JsonRequestBehavior.AllowGet);
+            var model = new CatalogModel().GetCatalogForCabinet(page);
+            var view = RenderViewToString("MyPuzzle", model);
+            return Json(new { view, CurrentPage = page, model.PageCount }, JsonRequestBehavior.AllowGet);
         }
 
         [UserAuthorize]
@@ -110,60 +70,32 @@ namespace Toppuzzle.Site.Controllers {
 
         [UserAuthorize]
         public ActionResult ChangePassword() {
-            return PartialView();
+            return PartialView(new ChangeUserDataModel());
         }
 
         [UserAuthorize]
         public ActionResult ChangeEmail() {
-            return PartialView();
+            return PartialView(new ChangeUserDataModel());
         }
 
         [HttpPost]
         [UserAuthorize]
-        public ActionResult ChangePassword(string OldPassword, string NewPassword, string ConfirmPassword) {
-            var currentUser = ApplicationFacade.Instance.GetCurrentUser();
-            if (!currentUser.Password.Equals(OldPassword)) return Json(new { data = "неверный старый пароль" }, JsonRequestBehavior.AllowGet);
-            if (!NewPassword.Equals(ConfirmPassword)) return Json(new { data = "пароли не совпадают" }, JsonRequestBehavior.AllowGet);
-            currentUser.Password = NewPassword;
-            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
-            ApplicationFacade.Instance.SetCurrentUser(currentUser);
-            return Json(new { data = "ok"}, JsonRequestBehavior.AllowGet);
+        public ActionResult ChangePassword(ChangeUserDataModel model) {
+            return PartialView(model.ChangePassword());
         }
 
-        [UserAuthorize]
         [HttpPost]
-        public ActionResult ChangeEmail(string Email) {
-            var user = ApplicationFacade.Instance.GetCurrentUser();
-            user.Email = Email;
-            ApplicationFacade.Instance.UserManager.UpdateUser(user);
-            ApplicationFacade.Instance.SetCurrentUser(user);
-            return Json(new{data="ok"}, JsonRequestBehavior.AllowGet);
+        [UserAuthorize]
+        public ActionResult ChangeEmail(ChangeUserDataModel model) {
+            return PartialView(model.ChangeEmail());
         }
 
         [UserAuthorize]
         public ActionResult ChangeAvatar() {
-            var currentUser = ApplicationFacade.Instance.GetCurrentUser();
             if (Request.Files.Count <= 0) return PartialView();
             var file = Request.Files[0];
             if (file == null || file.ContentLength <= 0) return PartialView();
-            Directory.CreateDirectory(Server.MapPath("~/Content/Users/" + currentUser.Id + "/"));
-            var picture = "avatar." + file.FileName.Substring(file.FileName.IndexOf('.') + 1);
-            var fileName = "~/Content/Users/" + currentUser.Id + "/" + picture;
-            fileName = Server.MapPath(fileName);
-            file.SaveAs(fileName);
-            currentUser.HasAvatar = true;
-            currentUser.Avatar = picture;
-            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
-            ApplicationFacade.Instance.SetCurrentUser(currentUser);
-            return Json(new{data="ok", fileName}, JsonRequestBehavior.AllowGet);
-        }
-
-        private static bool Authenticate(string username, string password) {
-            var af = ApplicationFacade.Instance;
-            var user = af.UserManager.GetUserByLoginAndPassword(username, password);
-            if (user == null) return false;
-            af.SetCurrentUser(user);
-            return true;
+            return Json(new{data="ok", fileName = new ChangeUserDataModel().ChangeAvatar(file)}, JsonRequestBehavior.AllowGet);
         }
     }
 }

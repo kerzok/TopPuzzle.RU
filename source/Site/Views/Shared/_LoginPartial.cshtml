@@ -1,5 +1,5 @@
 ﻿@using Toppuzzle.Site.Infrastucture
-@model Toppuzzle.Site.Models.BaseViewModel
+@model Toppuzzle.Site.Models.BaseModel
 @if (ApplicationFacade.Instance.IsAuthenticated()) {
     using (Html.BeginForm("Logout", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"})) {
         @Html.AntiForgeryToken()

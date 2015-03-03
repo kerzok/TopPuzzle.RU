@@ -131,14 +131,18 @@ var changePassword = function () {
     $("#old-password-text-field, #new-password-text-field, #confirm-password-text-field").unbind().blur(function () {
         var id = $(this).attr("id");
         var val = $(this).val();
+        var ok = true;
         switch (id) {
             case "old-password-text-field":
                 if (val.length >= 6) {
                     $(this).addClass("not_error");
                     $(this).css("border-color", "green");
                 } else {
+                    $("#message-box").empty();
+                    $("#message-box").append("Старый пароль слишком короткий!");
                     $(this).removeClass("not_error").addClass("error");
                     $(this).css("border-color", "red");
+                    ok = false;
                 }
                 break;
             case "new-password-text-field":
@@ -150,11 +154,17 @@ var changePassword = function () {
                     $("#confirm-password-text-field").addClass("not_error");
                     $("#confirm-password-text-field").css("border-color", "green");
                 } else {
+                    $("#message-box").empty();
+                    $("#message-box").append("Пароли не совпадают!");
                     $("#new-password-text-field").removeClass("not_error").addClass("error");
                     $("#new-password-text-field").css("border-color", "red");
                     $("#confirm-password-text-field").removeClass("not_error").addClass("error");
                     $("#confirm-password-text-field").css("border-color", "red");
+                    ok = false;
                 }
+        }
+        if (ok) {
+            $("#message-box").empty();
         }
     });
     $("#change-password-form").submit(function (e) {
@@ -165,18 +175,15 @@ var changePassword = function () {
                 url: "/cabinet/settings/password",
                 type: "post",
                 data: $(this).serialize(),
-
+                dataType: "HTML",
                 beforeSend: function (xhr, textStatus) {
                     $("#change-password-form :input").attr("disabled", "disabled");
                 },
 
-                success: function (response) {
-                    $("#change-password-form :input").removeAttr("disabled");
-                    if (response.data === "ok") {
-                        $("#message-box").text("Пароль был успешно изменен!");
-                    } else {
-                        $("#message-box").text(response.data);
-                    }
+                success: function (data) {
+                    $("#settings-partial").empty();
+                    $("#settings-partial").append(data);
+                    changePassword();
                 }
             });
         } else {
@@ -191,6 +198,7 @@ var changeEmail = function () {
     $("#change-email-input").unbind().blur(function() {
         var id = $(this).attr("id");
         var val = $(this).val();
+        var ok = true;
         switch (id) {
         case "change-email-input":
             var regex = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
@@ -198,10 +206,16 @@ var changeEmail = function () {
                 $(this).addClass("not_error");
                 $(this).css("border-color", "green");
             } else {
+                $("#message-box").empty();
+                $("#message-box").append("неверный e-mail!");
                 $(this).removeClass("not_error").addClass("error");
                 $(this).css("border-color", "red");
+                ok = false;
             }
             break;
+        }
+        if (ok) {
+            $("#message-box").empty();
         }
     });
     $("#change-email-form").submit(function(e) {
@@ -211,18 +225,14 @@ var changeEmail = function () {
                 url: "/cabinet/settings/default",
                 type: "post",
                 data: $(this).serialize(),
-
+                dataType: "HTML",
                 beforeSend: function(xhr, textStatus) {
                     $("#change-email-form :input").attr("disabled", "disabled");
                 },
-
-                success: function(response) {
-                    $("#change-email-form :input").removeAttr("disabled");
-                    if (response.data === "ok") {
-                        $("#message-box").text("E-mail был успешно изменен!");
-                    } else {
-                        $("#message-box").text("Упс, произошла ошибка:(");
-                    }
+                success: function (data) {
+                    $("#settings-partial").empty();
+                    $("#settings-partial").append(data);
+                    changeEmail();
                 }
             });
         } else {

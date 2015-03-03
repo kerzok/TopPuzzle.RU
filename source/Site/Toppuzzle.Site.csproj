@@ -81,18 +81,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\PictureHelper.cs" />
     <Compile Include="Infrastucture\ApplicationFacade.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BaseViewModel.cs" />
-    <Compile Include="Models\CabinetViewModel.cs" />
-    <Compile Include="Models\CatalogViewModel.cs" />
-    <Compile Include="Models\ChangeEmailViewModel.cs" />
-    <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CatalogModel.cs" />
     <Compile Include="Models\EditorViewModel.cs" />
-    <Compile Include="Models\MyPuzzleViewModel.cs" />
-    <Compile Include="Models\PictureViewModel.cs" />
-    <Compile Include="Models\ScoresViewModel.cs" />
+    <Compile Include="Models\PictureModel.cs" />
+    <Compile Include="Models\ScoreModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

@@ -41,12 +41,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataMapping\BaseManager.cs" />
     <Compile Include="DataMapping\DapperSqlMapper.cs" />
     <Compile Include="DataMapping\ISqlMapper.cs" />
-    <Compile Include="Entities\IUser.cs" />
     <Compile Include="Entities\Pictures.cs" />
     <Compile Include="Entities\Puzzle.cs" />
     <Compile Include="Entities\User.cs" />

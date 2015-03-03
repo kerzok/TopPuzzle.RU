@@ -1,26 +1,9 @@
-﻿@model Toppuzzle.Site.Models.ChangeEmailViewModel
+﻿@model Toppuzzle.Site.Models.ChangeUserDataModel
 
-@*@using (Html.BeginForm("ChangeEmail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="change-email-form"})) {
+<div id="message-box">@(Model.Success ? "E-mail был успешно изменен" : Model.Errors)</div>
+@using (Html.BeginForm("ChangeEmail", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", @id = "change-email-form", role = "form"})) {
     @Html.AntiForgeryToken()
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "change-email-input" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Изменить Email" />
-        </div>
-    </div>
-}*@
-
-<div id="message-box"></div>
-<form id="change-email-form" class="form-horizontal">
-    @Html.AntiForgeryToken()
-    <hr />
+    <hr/>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
         <div class="col-md-10">
@@ -32,7 +15,7 @@
             <input type="submit" class="btn btn-default" value="Изменить Email"/>
         </div>
     </div>
-</form>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

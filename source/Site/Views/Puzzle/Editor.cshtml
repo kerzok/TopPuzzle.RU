@@ -149,7 +149,11 @@
                                 left: left,
                                 top: top
                             });
-                            object.hasRotatingPoint = true;
+                            object.hasRotatingPoint = false;
+                            object.lockMovementX = true;
+                            object.lockMovementY = true;
+                            object.hasControls = false;
+                            object.hasBorders = false;
                             canvas.add(object);
                             canvas.renderAll();
                         }, null, { crossOrigin: "Anonymous" });

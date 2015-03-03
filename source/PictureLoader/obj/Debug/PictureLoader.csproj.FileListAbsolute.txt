@@ -1,6 +1,0 @@
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\bin\Debug\PictureLoader.dll
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\bin\Debug\PictureLoader.pdb
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\bin\Debug\FlickrNet.dll
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\obj\Debug\PictureLoader.csprojResolveAssemblyReference.cache
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\obj\Debug\PictureLoader.dll
-C:\TopPuzzle\TopPuzzle.RU\source\PictureLoader\obj\Debug\PictureLoader.pdb

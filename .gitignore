@@ -1,3 +1,10 @@
+source/Model/bin/*
+source/Model/obj/*
+source/Site/bin/*
+source/Site/obj/*
+source/Site/Content/Users/*
+source/Site/Content/Puzzles/*
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -26,8 +33,7 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
-
+Icon
 
 # Thumbnails
 ._*
@@ -228,6 +234,4 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-
-source/Site/Content/Users/*
-source/Site/Content/Puzzles/*
+source/Model/bin/Debug/Model.dll
