@@ -80,15 +80,28 @@ $(document).ready(function() {
         }
         showPopup();
         var time = stopTime();
-        $.ajax("/puzzle/getresult", {
-            type: "POST",
-            datatype: "JSON",
-            data: {
-                "Complexity": complexity,
-                "PictureId": pictureId,
-                "Time": convertDateToInt(time)
-            }
+        $(".editor-form").submit(function() {
+            $(".Complexity").each(function() {
+                $(this).val(complexity);
+            });
+            $(".Time").each(function() {
+                $(this).val(convertDateToInt(time));
+            });
+            $(".PictureId").each(function() {
+                $(this).val(pictureId);
+            });
+            return true;
         });
+
+        //$.ajax("/puzzle/getresult", {
+        //    type: "POST",
+        //    datatype: "JSON",
+        //    data: {
+        //        "Complexity": complexity,
+        //        "PictureId": pictureId,
+        //        "Time": convertDateToInt(time)
+        //    }
+        //});
         return true;
     };
     for (var i = 0; i < rowCount * cellCount; i++) {

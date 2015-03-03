@@ -22,10 +22,20 @@ namespace Toppuzzle.Site.Controllers {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Login(ScoreModel model) {
+            TempData["scoreModel"] = model;
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(BaseModel model, string returnUrl) {
             if (!ModelState.IsValid) return View();
             if (model.Authenticate()) {
+                if (TempData["scoreModel"] != null) {
+                    ((ScoreModel)TempData["scoreModel"]).SaveScore();
+                    TempData["scoreModel"] = null;
+                }
                 if (!String.IsNullOrEmpty(returnUrl)) {
                     return Redirect(returnUrl);
                 }
@@ -39,7 +49,12 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Register(RegisterModel model) {
             if (!ModelState.IsValid) return View(model);
             model = model.RegisterNewUser();
-            if (!model.HasError) return RedirectToAction("Index", "Home");
+            if (!model.HasError) {
+                if (TempData["scoreModel"] == null) return RedirectToAction("Cabinet", "Account");
+                ((ScoreModel)TempData["scoreModel"]).SaveScore();
+                TempData["scoreModel"] = null;
+                return RedirectToAction("Cabinet", "Account");
+            }
             ModelState.AddModelError(model.Error.Key, model.Error.Value);
             return View(model);
         }
@@ -53,6 +68,14 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Cabinet(int? userId) {
             if (!userId.HasValue) userId = ApplicationFacade.Instance.GetCurrentUser().Id;
             ViewBag.User = ApplicationFacade.Instance.UserManager.GetUserById(userId.Value);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Cabinet(ScoreModel model) {
+            model.SaveScore();
+            var userId = ApplicationFacade.Instance.GetCurrentUser().Id;
+            ViewBag.User = ApplicationFacade.Instance.UserManager.GetUserById(userId);
             return View();
         }
 

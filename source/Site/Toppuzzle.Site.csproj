@@ -92,7 +92,6 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CatalogModel.cs" />
-    <Compile Include="Models\EditorViewModel.cs" />
     <Compile Include="Models\PictureModel.cs" />
     <Compile Include="Models\ScoreModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,7 +167,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangeAvatar.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
-    <Content Include="Views\Puzzle\GetPicture.cshtml" />
     <Content Include="Views\Home\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>

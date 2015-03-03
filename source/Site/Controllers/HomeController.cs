@@ -13,6 +13,12 @@ namespace Toppuzzle.Site.Controllers {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(ScoreModel model) {
+            model.SaveScore();
+            return View();
+        }
+
         public ActionResult GetScores(int complexity = 1) {
             return View(ScoreModel.GetScores(complexity));
         }
