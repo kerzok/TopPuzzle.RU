@@ -1,37 +1,3 @@
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Site.dll.config
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Site.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Site.pdb
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Antlr3.Runtime.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Model.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Newtonsoft.Json.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Mvc.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Optimization.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Razor.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.Deployment.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.Razor.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\WebGrease.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Dapper.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Model.pdb
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Mvc.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Optimization.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.Razor.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.Deployment.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\System.Web.WebPages.Razor.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Antlr3.Runtime.pdb
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Newtonsoft.Json.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Dapper.pdb
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\Dapper.xml
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.Mvc.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.Optimization.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.Razor.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.WebPages.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.WebPages.Deployment.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\ru\System.Web.WebPages.Razor.resources.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\obj\Debug\Toppuzzle.Site.csprojResolveAssemblyReference.cache
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\obj\Debug\Site.dll
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\obj\Debug\Site.pdb
 C:\TopPuzzle\TopPuzzle.RU\source\Site\bin\Site.dll.config
 C:\TopPuzzle\TopPuzzle.RU\source\Site\bin\Site.dll
 C:\TopPuzzle\TopPuzzle.RU\source\Site\bin\Site.pdb
@@ -65,4 +31,3 @@ C:\TopPuzzle\TopPuzzle.RU\source\Site\bin\ru\System.Web.WebPages.Deployment.reso
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Toppuzzle.Site.csprojResolveAssemblyReference.cache
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Site.dll
 C:\TopPuzzle\TopPuzzle.RU\source\Site\obj\Debug\Site.pdb
-D:\Dropbox\ITMO. Programming\C#\WebProgramming\TopPuzzle.RU\source\Site\bin\FlickrNet.dll

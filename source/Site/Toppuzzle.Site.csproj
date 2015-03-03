@@ -102,7 +102,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Cabinet.js" />
     <Content Include="Scripts\fabric.js" />
-    <Content Include="Scripts\get-data-for-look.js" />
     <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\jquery-ui\index.html" />
     <Content Include="Scripts\jquery-ui\jquery-ui.css" />
@@ -128,7 +127,6 @@
     <Content Include="Scripts\jquery\respond.js" />
     <Content Include="Scripts\jquery\respond.min.js" />
     <Content Include="Scripts\jquery\_references.js" />
-    <Content Include="Scripts\js-collage.js" />
     <Content Include="Scripts\Puzzle.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -141,13 +139,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Puzzle\Editor.cshtml" />
     <Content Include="Views\Home\GetScores.cshtml" />
