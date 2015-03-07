@@ -24,7 +24,7 @@
                 }
             </td>
             <td class="player">
-                <a href="~/cabinet?userId=@score.User.Id">@score.User.UserName</a>
+                <a class="player" href="~/cabinet?userId=@score.User.Id">@score.User.UserName</a>
             </td>
             <td class="time">@(new TimeSpan(score.Time*10000).ToString().Substring(0, 8))</td>
             <td class="puzzle">@score.PictureId</td>
