@@ -5,6 +5,16 @@
     width: 25%;
 }
 
+a.player {
+    text-decoration: underline;
+}
+
+a.player:hover {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+}
+
 .time {
     text-align: center;
     color: blue;
