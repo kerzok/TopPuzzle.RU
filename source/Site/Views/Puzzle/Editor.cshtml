@@ -34,27 +34,27 @@
     </div>
 
     <div class="complexity-popup" id="popup1" style="display: none">
-        <div class="popup-content">
-            <div>Поздравляем, вы успешно собрали пазл!</div>
+        <div class="popup-content" id="editor-popup">
+            <div style="margin-left: 6px; font-size: 20px;">Поздравляем, вы успешно собрали пазл!</div>
             @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "editor-form", role = "form" })) {
                 <input type="hidden" name="Complexity" class="Complexity" />
                 <input type="hidden" name="Time" class="Time" />
                 <input type="hidden" name="PictureId" class="PictureId" />
-                <input type="submit" value="На главную" name="Submit" id="frm1_submit"/>
+                <input type="submit" value="На главную" name="Submit" class="frm1_submit"/>
             }
             @if (ApplicationFacade.Instance.GetCurrentUser() != null) {
                 using (Html.BeginForm("Cabinet", "Account", FormMethod.Post, new { @class = "editor-form", role = "form" })) {
                     <input type="hidden" name="Complexity" class="Complexity" />
                     <input type="hidden" name="Time" class="Time" />
                     <input type="hidden" name="PictureId" class="PictureId" />
-                    <input type="submit" value="В кабинет" name="Submit" id="frm1_submit"/>
+                    <input type="submit" value="В кабинет" name="Submit" class="frm1_submit"/>
                 }
             } else {
-                using (Html.BeginForm("Login", "Account", FormMethod.Get, new { @class = "editor-form", role = "form"})) {
+                using (Html.BeginForm("Login", "Account", FormMethod.Get, new { @class = "editor-form", role = "form" })) {
                     <input type="hidden" name="Complexity" class="Complexity" />
                     <input type="hidden" name="Time" class="Time" />
                     <input type="hidden" name="PictureId" class="PictureId" />
-                    <input type="submit" value="Войти" name="Submit" id="frm1_submit" />
+                    <input type="submit" value="Войти" name="Submit" class="frm1_submit"/>
                 }
             }
         </div>

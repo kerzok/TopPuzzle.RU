@@ -8,3 +8,18 @@
 .canvas-container {
     display: inline-block;
 }
+
+.editor-form {
+    display: inline-block;
+}
+
+#editor-popup {
+    width: 410px;
+}
+
+.frm1_submit {
+    width: 190px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    margin-left: 5px;
+}
