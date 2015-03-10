@@ -39,7 +39,7 @@ namespace Toppuzzle.Site.Models {
 
         public CatalogModel GetCatalogForCabinet() {
             var af = ApplicationFacade.Instance;
-            var scores = af.ScoreManager.GetUserScoreById(UserId).ToList();
+            var scores = af.ScoreManager.GetUserScoreById(UserId).Distinct().ToList();
             Pictures = new List<PictureModel>();
             for (var index = (CurrentPage - 1) * ItemPerPage; index < Math.Min((CurrentPage - 1) * ItemPerPage + ItemPerPage, scores.Count); index++) {
                 var score = scores[index];
@@ -54,7 +54,7 @@ namespace Toppuzzle.Site.Models {
                     Score = score
                 });
             }
-            PageCount = (scores.Count() / ItemPerPage) + 1;
+            PageCount = (scores.Count() % ItemPerPage == 0) ? (scores.Count() / ItemPerPage) : (scores.Count() / ItemPerPage) + 1;
             return this;
         }
     }

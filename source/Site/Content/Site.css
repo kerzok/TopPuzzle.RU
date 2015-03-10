@@ -161,6 +161,7 @@ textarea { max-width: 280px; }
     overflow:hidden;
     position:fixed;
     top:0px;
+    right: 0px;
 }
 .complexity-popup .popup-content{
     margin:250px auto 0px auto;

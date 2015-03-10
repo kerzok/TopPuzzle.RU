@@ -11,6 +11,7 @@ namespace Toppuzzle.Site.Models {
         public int PictureId { get; set; }
         public DateTime Date { get; set; }
         public int Complexity { get; set; }
+        public bool HasSaved { get; set; }
 
         public static List<ScoreModel> GetScores(int complexity) {
             var af = ApplicationFacade.Instance;
@@ -24,9 +25,10 @@ namespace Toppuzzle.Site.Models {
             return result;
         }
 
-        public void SaveScore() {
+        public ScoreModel SaveScore() {
+            if (HasSaved) return this;
             var user = ApplicationFacade.Instance.GetCurrentUser();
-            if (user == null) return;
+            if (user == null) return this;
             var score = new Score {
                 Complexity = Complexity,
                 Date = DateTime.Today,
@@ -34,10 +36,12 @@ namespace Toppuzzle.Site.Models {
                 Time = Time,
                 UserId = user.Id
             };
-            user.Rating += score.Complexity * 20;
+            user.Rating += score.Complexity*20;
             ApplicationFacade.Instance.ScoreManager.InsertScore(score);
             ApplicationFacade.Instance.UserManager.UpdateUser(user);
             ApplicationFacade.Instance.SetCurrentUser(user);
+            HasSaved = true;
+            return this;
         }
     }
 }

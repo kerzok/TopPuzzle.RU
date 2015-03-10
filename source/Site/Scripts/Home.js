@@ -55,6 +55,7 @@ var getDataToCatalog = function(page) {
         datatype: "JSON",
         data: { CurrentPage: page},
         success: function (data) {
+            $("#placeholder").hide();
             $("#catalog").empty();
             $("#catalog").append(data.view);
             fillPager(data.PageCount, data.CurrentPage);
@@ -72,6 +73,9 @@ var getDataToCatalog = function(page) {
 }
 
 $(document).ready(function () {
+    $("#close-btn").click(function () {
+        hidePopup();
+    });
     hidePopup();
     $("#scores").load("/scores");
     $("#c-easy").addClass("chosen-complexity");
@@ -82,11 +86,13 @@ $(document).ready(function () {
             type: "POST",
             beforeSend: function() {
                 $("#random").attr("disabled", "disabled");
+                $("#wait").show();
             },
             success: function(data) {
                 $("#random").removeAttr("disabled");
                 getDataToCatalog(lastCurrentPage);
                 pictureId = data.Id;
+                $("#wait").hide();
                 showPopup();               
             }
         });
@@ -118,10 +124,6 @@ $(document).ready(function () {
     $("#easy, #medium, #hard").click(function() {
         var complexity = $(this).attr("complexity");
         window.location.href = "puzzle?Complexity=" + complexity + "&Id=" + pictureId;
-    });
-
-    $("#close-btn").click(function() {
-        hidePopup();
     });
 });
 

@@ -101,6 +101,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\Placeholder.png" />
     <Content Include="Content\PuzzleEditor.css" />
     <Content Include="Content\Scores.css" />

@@ -47,7 +47,11 @@ var getDataToCatalog = function (page) {
         type: "POST",
         datatype: "JSON",
         data: { CurrentPage: page, UserId: userId },
+        beforeSend: function () {
+            $("#placeholder").show();
+        },
         success: function (data) {
+            $("#placeholder").hide();
             $("#partial").empty();
             $("#partial").append(data.view);
             fillPager(data.PageCount, data.CurrentPage);

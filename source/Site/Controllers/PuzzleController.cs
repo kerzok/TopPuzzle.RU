@@ -14,5 +14,11 @@ namespace Toppuzzle.Site.Controllers {
         public ActionResult Editor(PictureModel model) {
             return View(model.GetPicture());
         }
+
+        [HttpPost]
+        public ActionResult SaveScore(ScoreModel model, int whereTo) {
+            model.SaveScore();
+            return whereTo == 1 ? RedirectToAction("Index", "Home") : RedirectToAction("Cabinet", "Account");
+        }
     }
 }

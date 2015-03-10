@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Toppuzzle.Site.Models.ScoreModel
+@{
     ViewBag.Title = "Лучшие пазлы онлайн";
 }
 
@@ -16,6 +17,7 @@
     <div>
         <div class="parts" id="catalog-with-pager">
             <input type="button" id="random" class="btn btn-default" value="Случайный пазл"/>
+            <img src="~/Content/Images/ajax-loader.gif" id="placeholder" />
             <div id="catalog"></div>
             <div id="pager"></div>
         </div>
@@ -34,5 +36,10 @@
         <div id="easy" complexity="1">Легкий</div>
         <div id="medium" complexity="2">Средний</div>
         <div id="hard" complexity="3">Сложный</div>
+    </div>
+</div>
+<div class="complexity-popup" id="wait" style="display: none">
+    <div class="popup-content">
+        <img src="~/Content/Images/ajax-loader.gif" id="placeholder" style="margin-left: 110px;"/>
     </div>
 </div>
