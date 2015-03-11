@@ -71,14 +71,6 @@ namespace Toppuzzle.Site.Controllers {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Cabinet(ScoreModel model) {
-            model.SaveScore();
-            var userId = ApplicationFacade.Instance.GetCurrentUser().Id;
-            ViewBag.User = ApplicationFacade.Instance.UserManager.GetUserById(userId);
-            return View();
-        }
-
         public ActionResult MyPuzzle(CatalogModel model) {
             model.GetCatalogForCabinet();
             var view = RenderViewToString("MyPuzzle", model);
