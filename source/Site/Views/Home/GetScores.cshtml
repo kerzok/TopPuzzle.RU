@@ -26,7 +26,7 @@
             <td class="player">
                 <a class="player" href="~/cabinet?userId=@score.User.Id">@score.User.UserName</a>
             </td>
-            <td class="time">@(new TimeSpan(score.Time*10000).ToString().Substring(0, 8))</td>
+            <td class="time">@(new TimeSpan(score.Time*10000L).ToString().Substring(0, 8))</td>
             <td class="puzzle">@score.PictureId</td>
             <td class="date">@score.Date.ToShortDateString()</td>
         </tr>
