@@ -208,3 +208,15 @@ textarea { max-width: 280px; }
 #close-btn:hover {
     color: #aaa;
 }
+
+.navbar-inverse {
+	background-color: #FA6A04;
+}
+
+.navbar-inverse .navbar-nav>li>a , .navbar-inverse .navbar-brand{
+	color: #FFFFFF;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
+	color: #B9B9B9;
+}
