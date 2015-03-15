@@ -36,7 +36,7 @@ namespace Toppuzzle.Model.Managers
             var photo = photos[random.Next(photos.Count - 1)];
             var currentPicture = GetPictureByPictureId(photo.PhotoId);
             if (currentPicture != null) return currentPicture;
-            var image = GetImageFromUrl(photo.LargeUrl);
+            var image = GetImageFromUrl(photo.MediumUrl);
             Directory.CreateDirectory(HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\");
             NormalizeAndSaveImage(image, HostingEnvironment.ApplicationPhysicalPath + @"\Content\Puzzles\" + photo.PhotoId + ".jpg");
             return InsertPicture(new Pictures {
