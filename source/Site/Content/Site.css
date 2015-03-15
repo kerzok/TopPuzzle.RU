@@ -214,9 +214,9 @@ textarea { max-width: 280px; }
 }
 
 .navbar-inverse .navbar-nav>li>a , .navbar-inverse .navbar-brand{
-	color: #FFFFFF;
+	color: #F3F3F3;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-brand:hover {
-	color: #B9B9B9;
+	color: #FFFFFF;
 }
