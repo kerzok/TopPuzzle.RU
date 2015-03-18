@@ -146,7 +146,13 @@ $(document).ready(function() {
             var rows = (top / (canvas.height / cellCount));
             var cells = (left / (canvas.width / rowCount));
             var place = rows * rowCount + cells;
-            items[place] = picture.attr('index');
+            var curIndex = picture.attr('index');
+            $("img[index='" + curIndex + "']").parent().hide();
+            var prevIndex = items[place];
+            if (prevIndex > -1) {
+                $("img[index='" + prevIndex + "']").parent().show();
+            }
+            items[place] = curIndex;
             checkPuzzle();
         }
     });
