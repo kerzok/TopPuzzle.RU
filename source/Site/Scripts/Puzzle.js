@@ -156,4 +156,31 @@ $(document).ready(function() {
             checkPuzzle();
         }
     });
+
+    addEventListener("dblclick", function(event) {
+        var x = event.pageX;
+        var y = event.pageY;
+        var leftC = (x - $("#editor").offset().left);
+        var topC = (y - $("#editor").offset().top);
+        var left = leftC - leftC % (canvas.width / rowCount);
+        var top = topC - topC % (canvas.height / cellCount);
+        var rows = (top / (canvas.height / cellCount));
+        var cells = (left / (canvas.width / rowCount));
+        var place = rows * rowCount + cells;
+        if (place < items.length) {
+            var index = items[place];
+            if (index > -1) {
+                $("img[index='" + index + "']").parent().show();
+            }
+            items[place] = -1;
+            var objects = canvas.getObjects();
+            for (var ind = 5; ind < objects.length; ++ind) {
+                var cur = objects[ind];
+                if (cur.get('top') == top && cur.get('left') == left) {
+                    canvas.remove(cur);
+                    break;
+                }
+            }
+        }
+    });
 });
