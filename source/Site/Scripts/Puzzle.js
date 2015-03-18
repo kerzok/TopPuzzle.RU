@@ -150,6 +150,14 @@ $(document).ready(function() {
             $("img[index='" + curIndex + "']").parent().hide();
             var prevIndex = items[place];
             if (prevIndex > -1) {
+                var objects = canvas.getObjects();
+                for (var ind = 5; ind < objects.length; ++ind) {
+                    var cur = objects[ind];
+                    if (cur.get('top') == top && cur.get('left') == left) {
+                        canvas.remove(cur);
+                        break;
+                    }
+                }
                 $("img[index='" + prevIndex + "']").parent().show();
             }
             items[place] = curIndex;
