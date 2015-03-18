@@ -55,7 +55,7 @@ $(document).ready(function() {
     var canvas = new fabric.Canvas("editor", {
         backgroundColor: "#ffffff"
     });
-
+    canvas.selection = false;
 
     var rowCount = 0;
     var cellCount = 0;
