@@ -1,6 +1,7 @@
 ﻿var items = [];
 var startDate;
 var t;
+var canvas;
 
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
@@ -48,11 +49,23 @@ function hidePopup() {
     $("#popup1").hide();
 }
 
+function retry() {
+    var objects = canvas.getObjects();
+    for (var ind = objects.length - 1; ind >= 5; --ind) {
+        canvas.remove(objects[ind]);
+    }
+    for (var index = 0; index < items.length; ++index) {
+        items[index] = -1;
+        $("img[index='" + index + "']").parent().show();
+    }
+    startDate = new Date().addHours(3);
+};
+
 $(document).ready(function() {
     var complexity = parseInt($("#model-data").attr("complexity"));
     var pictureId = $("#model-data").attr("pictureId");
     hidePopup();
-    var canvas = new fabric.Canvas("editor", {
+    canvas = new fabric.Canvas("editor", {
         backgroundColor: "#ffffff"
     });
     canvas.selection = false;

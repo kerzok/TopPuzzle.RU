@@ -24,3 +24,29 @@
     margin-top: 2px;
     margin-left: 5px;
 }
+
+#retry {
+    position: fixed;
+    left: 20px;
+    top: 80px;
+}
+
+#retry:hover {
+    -webkit-filter: grayscale(69%);
+    -moz-filter: grayscale(69%);
+    -o-filter: grayscale(69%);
+    cursor: pointer;
+}
+
+#retry:active {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+}
+
+#txt {
+    font-size: 30px;
+    position: fixed;
+    right: 20px;
+    top: 80px;
+}
