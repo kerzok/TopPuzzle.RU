@@ -87,26 +87,80 @@ $(document).ready(function() {
             break;
     }
 
-    var checkPuzzle = function() {
+    var checkPuzzle = function () {
         for (var i = 0; i < rowCount * cellCount; i++) {
             if (i != items[i]) return false;
         }
         showPopup();
         var time = stopTime();
-        $(".editor-form").submit(function() {
-            $(".Complexity").each(function() {
+        $(".editor-form").submit(function () {
+            $(".Complexity").each(function () {
                 $(this).val(complexity);
             });
-            $(".Time").each(function() {
+            $(".Time").each(function () {
                 $(this).val(convertDateToInt(time));
             });
-            $(".PictureId").each(function() {
+            $(".PictureId").each(function () {
                 $(this).val(pictureId);
             });
             return true;
         });
         return true;
     };
+
+    canvas.on({
+        'mouse:down': function (e, ui) {
+            if (e.target) {
+                e.target.opacity = 0.5;
+                canvas.renderAll();
+            }
+        },
+        'mouse:up': function (e, ui) {
+            if (e.target) {
+                e.target.opacity = 1;
+                canvas.renderAll();
+            }
+        },
+        'object:moved': function (e, ui) {
+            e.target.opacity = 0.5;
+        },
+        'object:modified': function (e, ui) {
+            var leftMiddle = e.target.left + (canvas.width / (2 * rowCount));
+            var topMiddle = e.target.top + (canvas.height / (2 * cellCount));
+            var left = leftMiddle - leftMiddle % (canvas.width / rowCount);
+            var top = topMiddle - topMiddle % (canvas.height / cellCount);
+            e.target.set({
+                top: top,
+                left: left
+            });
+            var rows = (top / (canvas.height / cellCount));
+            var cells = (left / (canvas.width / rowCount));
+            var place = rows * rowCount + cells;
+            var curIndex = e.target.get("index");
+            for (var i = 0; i < items.length; i++) {
+                if (items[i] === curIndex) {
+                    items[i] = -1;
+                }
+            }
+            var prevIndex = items[place];
+            if (prevIndex > -1) {
+                var objects = canvas.getObjects();
+                for (var ind = 5; ind < objects.length; ++ind) {
+                    var cur = objects[ind];
+                    if (cur.get("top") === top && cur.get("left") === left) {
+                        canvas.remove(cur);
+                        break;
+                    }
+                }
+                $("img[index='" + prevIndex + "']").parent().show();
+            }
+            items[place] = curIndex;
+            checkPuzzle();
+            e.target.opacity = 1;
+        }
+    });
+
+    
     for (var i = 0; i < rowCount * cellCount; i++) {
         items.push(-1);
     }
@@ -146,11 +200,10 @@ $(document).ready(function() {
                 var object = new fabric.Image(img);
                 object.set({
                     left: left,
-                    top: top
+                    top: top,
+                    index: picture.attr("index")
                 });
                 object.hasRotatingPoint = false;
-                object.lockMovementX = true;
-                object.lockMovementY = true;
                 object.hasControls = false;
                 object.hasBorders = false;
                 canvas.add(object);
