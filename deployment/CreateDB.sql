@@ -22,7 +22,7 @@ ALTER ROLE [db_datawriter] ADD MEMBER [IIS APPPOOL\toppuzzle.ru]
 GO
 
 GO
-/****** Object:  Table [dbo].[Picture]    Script Date: 03.03.2015 3:16:52 ******/
+/****** Object:  Table [dbo].[Picture]    Script Date: 19.03.2015 22:57:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[Picture](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Score]    Script Date: 03.03.2015 3:16:52 ******/
+/****** Object:  Table [dbo].[Score]    Script Date: 19.03.2015 22:57:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -49,15 +49,15 @@ CREATE TABLE [dbo].[Score](
 	[PictureId] [int] NOT NULL,
 	[Complexity] [int] NOT NULL,
 	[Time] [int] NOT NULL,
-	[Date] [datetime] NOT NULL DEFAULT (getdate())
-CONSTRAINT [PK_Score] PRIMARY KEY CLUSTERED 
+	[Date] [datetime] NOT NULL,
+ CONSTRAINT [PK_Score] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 03.03.2015 3:16:52 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 19.03.2015 22:57:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -65,16 +65,24 @@ GO
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](50) NOT NULL,
-	[Password] [nvarchar](50) NOT NULL,
+	[Password] [int] NOT NULL,
 	[Email] [nvarchar](50) NULL,
-	[HasAvatar] [bit] NOT NULL DEFAULT ((0)),
+	[HasAvatar] [bit] NOT NULL,
 	[Avatar] [nvarchar](500) NULL,
-	[Rating] [int] NOT NULL DEFAULT ((0)),
+	[Rating] [int] NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Score] ADD  DEFAULT (getdate()) FOR [Date]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT ((0)) FOR [HasAvatar]
+GO
+ALTER TABLE [dbo].[Users] ADD  DEFAULT ((0)) FOR [Rating]
+GO
 
 GO
 USE [master]

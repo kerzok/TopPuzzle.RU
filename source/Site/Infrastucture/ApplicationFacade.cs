@@ -98,5 +98,13 @@ namespace Toppuzzle.Site.Infrastucture {
             currentUserCookie.Value = null;
             HttpContext.Current.Response.SetCookie(currentUserCookie);
         }
+
+        public static int GetPasswordHash(string password) {
+            var hash = 3557;
+            for (var index = 0; index < password.Length; index++) {
+                hash ^= ((index * password[index]) + 991);
+            }
+            return hash;
+        }
     }
 }

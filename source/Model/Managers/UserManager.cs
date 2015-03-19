@@ -11,7 +11,7 @@ namespace Toppuzzle.Model.Managers {
 
         public User InsertUser(User user) {
             return
-                SqlMapper.Execute<User>("InsertUser", new {user.UserName, user.Password, user.Email})
+                SqlMapper.Execute<User>("InsertUser", new {user.UserName, Password = user.PasswordHash, user.Email})
                     .FirstOrDefault();
         }
 
@@ -19,8 +19,8 @@ namespace Toppuzzle.Model.Managers {
             return SqlMapper.Execute<User>("GetUserById", new {Id = id}).FirstOrDefault();
         }
 
-        public User GetUserByLoginAndPassword(string login, string password) {
-            return SqlMapper.Execute<User>("GetUserByLoginAndPassword", new {
+        public User GetUserByLoginAndHash(string login, int password) {
+            return SqlMapper.Execute<User>("GetUserByLoginAndHash", new {
                 Login = login,
                 Password = password
             }).FirstOrDefault();
@@ -35,7 +35,7 @@ namespace Toppuzzle.Model.Managers {
         }
 
         public void UpdateUser(User user) {
-            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, user.Password, user.Avatar, user.HasAvatar, user.Rating});
+            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, Password = user.PasswordHash, user.Avatar, user.HasAvatar, user.Rating});
         }
     }
 }

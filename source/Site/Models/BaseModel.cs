@@ -18,7 +18,7 @@ namespace Toppuzzle.Site.Models {
 
         public bool Authenticate() {
             var af = ApplicationFacade.Instance;
-            var user = af.UserManager.GetUserByLoginAndPassword(Login, Password);
+            var user = af.UserManager.GetUserByLoginAndHash(Login, ApplicationFacade.GetPasswordHash(Password));
             if (user == null) return false;
             af.SetCurrentUser(user);
             return true;

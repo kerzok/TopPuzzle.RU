@@ -48,7 +48,7 @@ namespace Toppuzzle.Site.Models {
 
             user = af.UserManager.InsertUser(new User {
                 Email = Email,
-                Password = Password,
+                PasswordHash = ApplicationFacade.GetPasswordHash(Password),
                 UserName = Login
             });
             af.SetCurrentUser(user);
@@ -72,7 +72,8 @@ namespace Toppuzzle.Site.Models {
 
         public ChangeUserDataModel ChangePassword() {
             var currentUser = ApplicationFacade.Instance.GetCurrentUser();
-            if (!currentUser.Password.Equals(OldPassword)) {
+            var newPasswordHash = ApplicationFacade.GetPasswordHash(OldPassword);
+            if (!currentUser.PasswordHash.Equals(newPasswordHash)) {
                 Errors = "неверный старый пароль";
                 Success = false;
                 return this;
@@ -82,7 +83,7 @@ namespace Toppuzzle.Site.Models {
                 Success = false;
                 return this;
             }
-            currentUser.Password = NewPassword;
+            currentUser.PasswordHash = newPasswordHash;
             ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
             ApplicationFacade.Instance.SetCurrentUser(currentUser);
             Success = true;
