@@ -112,6 +112,7 @@ $(document).ready(function() {
         'mouse:down': function (e, ui) {
             if (e.target) {
                 e.target.opacity = 0.5;
+                canvas.bringToFront(e.target);
                 canvas.renderAll();
             }
         },
