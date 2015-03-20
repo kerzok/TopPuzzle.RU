@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toppuzzle.Site", "Site\Topp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toppuzzle.Model", "Model\Toppuzzle.Model.csproj", "{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toppuzzle.Test", "Toppuzzle.Test\Toppuzzle.Test.csproj", "{FB8DB51A-B16F-429D-AB68-E9E594B28C36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA5ADBD-F143-4E50-B6BB-AA9D062EF34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8DB51A-B16F-429D-AB68-E9E594B28C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8DB51A-B16F-429D-AB68-E9E594B28C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8DB51A-B16F-429D-AB68-E9E594B28C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8DB51A-B16F-429D-AB68-E9E594B28C36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,21 +14,29 @@ namespace Toppuzzle.Model.DataMapping {
         public IEnumerable<T> Execute<T>(string procName, object parameters) {
             using (var connection = new SqlConnection(_connectionString)) {
                 connection.Open();
-                return SqlMapper.Query<T>(connection, procName, parameters, commandType: CommandType.StoredProcedure);
+                return connection.Query<T>(procName, parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
         public IEnumerable<T> Query<T>(string query) {
             using (var connection = new SqlConnection(_connectionString)) {
                 connection.Open();
-                return SqlMapper.Query<T>(connection, query);
+                return connection.Query<T>(query);
+            }
+        }
+
+        public void Query(string query)
+        {
+            using (var connection = new SqlConnection(_connectionString)) {
+                connection.Open();
+                connection.Query(query);
             }
         }
 
         public void Execute(string procName, object parameters) {
             using (var connection = new SqlConnection(_connectionString)) {
                 connection.Open();
-                SqlMapper.Execute(connection, procName, parameters, commandType: CommandType.StoredProcedure);
+                connection.Execute(procName, parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
