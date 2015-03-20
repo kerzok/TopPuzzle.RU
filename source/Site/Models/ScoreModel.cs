@@ -38,7 +38,7 @@ namespace Toppuzzle.Site.Models {
             };
             user.Rating += score.Complexity*20;
             ApplicationFacade.Instance.ScoreManager.InsertScore(score);
-            ApplicationFacade.Instance.UserManager.UpdateUser(user);
+            ApplicationFacade.Instance.UserManager.UpdateUserRating(user);
             ApplicationFacade.Instance.SetCurrentUser(user);
             HasSaved = true;
             return this;

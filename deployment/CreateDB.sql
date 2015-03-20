@@ -56,16 +56,17 @@ CREATE TABLE [dbo].[Score](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
-/****** Object:  Table [dbo].[Users]    Script Date: 19.03.2015 22:57:48 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 20.03.2015 23:50:19 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](50) NOT NULL,
-	[Password] [int] NOT NULL,
+	[PasswordHash] [int] NOT NULL,
 	[Email] [nvarchar](50) NULL,
 	[HasAvatar] [bit] NOT NULL,
 	[Avatar] [nvarchar](500) NULL,

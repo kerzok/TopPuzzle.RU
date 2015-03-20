@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using Toppuzzle.Model.DataMapping;
 using Toppuzzle.Model.Entities;
 
@@ -11,7 +10,7 @@ namespace Toppuzzle.Model.Managers {
 
         public User InsertUser(User user) {
             return
-                SqlMapper.Execute<User>("InsertUser", new {user.UserName, Password = user.PasswordHash, user.Email})
+                SqlMapper.Execute<User>("InsertUser", new {user.UserName, user.PasswordHash, user.Email})
                     .FirstOrDefault();
         }
 
@@ -22,7 +21,7 @@ namespace Toppuzzle.Model.Managers {
         public User GetUserByLoginAndHash(string login, int password) {
             return SqlMapper.Execute<User>("GetUserByLoginAndHash", new {
                 Login = login,
-                Password = password
+                PasswordHash = password
             }).FirstOrDefault();
         }
 
@@ -34,8 +33,20 @@ namespace Toppuzzle.Model.Managers {
             return SqlMapper.Execute<User>("GetUserByEmail", email).FirstOrDefault();
         }
 
-        public void UpdateUser(User user) {
-            SqlMapper.Execute("UpdateUser", new{user.Id, user.Email, Password = user.PasswordHash, user.Avatar, user.HasAvatar, user.Rating});
+        public void UpdateUserAvatar(User user) {
+            SqlMapper.Execute("UpdateUserAvatar", new{user.Id, user.Avatar});
+        }
+
+        public void UpdateUserEmail(User user) {
+            SqlMapper.Execute("UpdateUserEmail", new { user.Id, user.Email});
+        }
+
+        public void UpdateUserPassword(User user) {
+            SqlMapper.Execute("UpdateUserPassword", new { user.Id, user.PasswordHash});
+        }
+
+        public void UpdateUserRating(User user) {
+            SqlMapper.Execute("UpdateUserRating", new { user.Id, user.Rating });
         }
     }
 }

@@ -72,8 +72,8 @@ namespace Toppuzzle.Site.Models {
 
         public ChangeUserDataModel ChangePassword() {
             var currentUser = ApplicationFacade.Instance.GetCurrentUser();
-            var newPasswordHash = ApplicationFacade.GetPasswordHash(OldPassword);
-            if (!currentUser.PasswordHash.Equals(newPasswordHash)) {
+            var oldPasswordHash = ApplicationFacade.GetPasswordHash(OldPassword);
+            if (!currentUser.PasswordHash.Equals(oldPasswordHash)) {
                 Errors = "неверный старый пароль";
                 Success = false;
                 return this;
@@ -83,8 +83,9 @@ namespace Toppuzzle.Site.Models {
                 Success = false;
                 return this;
             }
+            var newPasswordHash = ApplicationFacade.GetPasswordHash(NewPassword);
             currentUser.PasswordHash = newPasswordHash;
-            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
+            ApplicationFacade.Instance.UserManager.UpdateUserPassword(currentUser);
             ApplicationFacade.Instance.SetCurrentUser(currentUser);
             Success = true;
             return this;
@@ -93,7 +94,7 @@ namespace Toppuzzle.Site.Models {
         public ChangeUserDataModel ChangeEmail() {
             var user = ApplicationFacade.Instance.GetCurrentUser();
             user.Email = Email;
-            ApplicationFacade.Instance.UserManager.UpdateUser(user);
+            ApplicationFacade.Instance.UserManager.UpdateUserEmail(user);
             ApplicationFacade.Instance.SetCurrentUser(user);
             Success = true;
             return this;
@@ -114,7 +115,7 @@ namespace Toppuzzle.Site.Models {
             file.SaveAs(path);
             currentUser.HasAvatar = true;
             currentUser.Avatar = picture;
-            ApplicationFacade.Instance.UserManager.UpdateUser(currentUser);
+            ApplicationFacade.Instance.UserManager.UpdateUserAvatar(currentUser);
             ApplicationFacade.Instance.SetCurrentUser(currentUser);
             return path;
         }
