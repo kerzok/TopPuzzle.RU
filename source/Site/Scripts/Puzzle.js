@@ -2,6 +2,7 @@
 var startDate;
 var t;
 var canvas;
+var linesCount;
 
 Date.prototype.addHours= function(h){
     this.setHours(this.getHours()+h);
@@ -51,7 +52,7 @@ function hidePopup() {
 
 function retry() {
     var objects = canvas.getObjects();
-    for (var ind = objects.length - 1; ind >= 5; --ind) {
+    for (var ind = objects.length - 1; ind >= linesCount; --ind) {
         canvas.remove(objects[ind]);
     }
     for (var index = 0; index < items.length; ++index) {
@@ -76,14 +77,17 @@ $(document).ready(function() {
         case 1:
             rowCount = 4;
             cellCount = 3;
+            linesCount = 5;
             break;
         case 2:
             rowCount = 6;
             cellCount = 4;
+            linesCount = 8;
             break;
         case 3:
             rowCount = 8;
             cellCount = 6;
+            linesCount = 12;
             break;
     }
 
